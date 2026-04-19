@@ -187,6 +187,61 @@ const BAE_DATA = {
         { label:"Australia",   pct:19, color:"#14b8a6" },
         { label:"Land UK",     pct: 7, color:"#99f6e4" }
       ]
+  outreachPlaybook: {
+    badge: "Cold→Warm",
+    headline: "Horizon Solutions launch + HAL/India expansion = two live entry points",
+    triggers: [
+      { icon:"🚀", label:"Horizon Solutions Aftermarket Expansion (2026 build-out)",
+        body:"BAE launched Horizon Solutions aftermarket avionics services at MRO Europe Oct 2025. Build-out phase runs through 2026 — need for aftermarket engineering, certification support, tech pubs.",
+        action:"Email hook: 'Saw Horizon Solutions at MRO Europe — aftermarket avionics engineering is exactly where we've supported Thales and Collins. 20 mins to talk cert support for the build-out?'" },
+      { icon:"🇮🇳", label:"BAeHAL Hyderabad Gap — Cyient HQ Advantage",
+        body:"BAE's only India presence is BAeHAL Bangalore (est. 1993). Hyderabad has no BAE footprint despite being India's defense/aerospace capital. Cyient HQ is Hyderabad — HAL, DRDO, Bharat Dynamics all neighbours.",
+        action:"Pitch: 'BAeHAL proves the India engineering model. Hyderabad is the next frontier — DRDO, HAL, BDL all here, and we're already embedded. Let us be your Hyderabad delivery partner.'" },
+      { icon:"🛡️", label:"UK ITAR-Compliant ER&D Demand",
+        body:"BAE is ITAR-controlled. Supply-chain engineering must meet strict security requirements. Cyient holds ITAR registration and secure delivery capability — rare among Indian ER&D firms.",
+        action:"Credential: reference Cyient's ITAR registration and existing defense program experience upfront in every BAE conversation." },
+      { icon:"📡", label:"Electronic Systems Avionics Certification Backlog",
+        body:"BAE Electronic Systems (Nashua NH) runs avionics programs for F-35, Eurofighter, naval electronic warfare. Cert documentation, DO-178C, DO-254 work is continuous and can be outsourced.",
+        action:"Target: TA Business Partners for Electronic Systems at Nashua NH and maritime at Govan UK. Lead with avionics cert track record." }
+    ],
+    coldToWarm: [
+      { step:1, label:"Cold Signal Monitor", body:"Watch BAE press releases for Horizon Solutions updates, India announcements, new platform wins. Each is an outreach trigger." },
+      { step:2, label:"Personalised Email to TA/VP", body:"Reference specific BAE news in one sentence. Cite Cyient's A&D credential. One question. No deck attachment." },
+      { step:3, label:"LinkedIn Engagement", body:"Connect with BAE India Country Head and BAeHAL MD. Comment on posts about India defense manufacturing with relevant insight." },
+      { step:4, label:"Event Pre-Outreach", body:"2 weeks before MRO Americas (Apr 21) or Farnborough (Jul 20): email to schedule 20-min at-show meeting." },
+      { step:5, label:"Warm Meeting", body:"Agenda: Horizon Solutions cert backlog → Cyient DO-178C track record → India Hyderabad hub pitch → action item." }
+    ]
+  },
+  partnerships: [
+    { name:"BAeHAL (Bangalore)", type:"JV / India Entity", status:"Active 30+ years",
+      desc:"BAE's 30-year India engineering JV providing embedded systems, simulation, IT, and tech pubs for Airbus, Rolls-Royce, HAL, ISRO, BEL.",
+      angle:"No Hyderabad presence. Cyient can be BAE's Hyderabad delivery partner — same BAeHAL model, different city. DRDO, HAL, BDL all co-located with Cyient HQ." },
+    { name:"Horizon Solutions (Aftermarket)", type:"Product Launch", status:"Launched Oct 2025",
+      desc:"New aftermarket avionics services and support brand launched at MRO Europe 2025. Engineering design, certification support, digital tools for commercial avionics aftermarket.",
+      angle:"Build-out phase = outsourced cert engineering demand. Cyient has the DO-178C / DO-254 capability and AS9100D certification to support this." },
+    { name:"MBDA (Missile Systems JV)", type:"Defense JV", status:"Active",
+      desc:"BAE holds stake in MBDA alongside Airbus and Leonardo. Missile guidance, avionics, and propulsion — advanced engineering programs requiring rigorous documentation.",
+      angle:"Tech pubs, MBSE, and systems engineering for guided weapons programs. ITAR-compliant delivery required — Cyient's ITAR registration is the credential." },
+    { name:"Rolls-Royce (Eurofighter EJ200)", type:"Platform Partner", status:"Active",
+      desc:"Eurofighter Typhoon program: BAE (airframe), Rolls-Royce (EJ200 engine), Leonardo, Airbus Defence. Multi-decade support and upgrade programs ongoing.",
+      angle:"Eurofighter upgrade programs = continuous tech pubs, structural analysis, and certification documentation. Cyient's Rolls-Royce relationship is the warm intro path." }
+  ],
+  events: [
+    { name:"MRO Americas", date:"Apr 21–23, 2026", location:"Orlando, FL",
+      type:"Trade Show", priority:"🔴 MUST",
+      why:"BAE aftermarket (Horizon Solutions) leadership attends. Best event to engage avionics services/support team and position Cyient as aftermarket cert engineering partner." },
+    { name:"Farnborough Airshow", date:"July 20–24, 2026", location:"Farnborough, UK",
+      type:"Trade Show", priority:"🔴 MUST",
+      why:"BAE is a major exhibitor at every Farnborough. Platform programme and supply-chain leadership all attend. Best access to BAE C-suite outside Farnborough/Warton." },
+    { name:"AeroDef Manufacturing", date:"Apr 14–16, 2026", location:"Boston, MA",
+      type:"Conference", priority:"🟠 HIGH",
+      why:"Defense and advanced manufacturing focus. BAE Electronic Systems supply chain and engineering leadership attends. ITAR/defense ER&D angle." },
+    { name:"DSEI (Defence & Security Equipment)", date:"Sept 2027", location:"London, UK",
+      type:"Trade Show", priority:"🟡 PLAN AHEAD",
+      why:"BAE's premier defense show — biennial. Attend 2025 edition or plan for 2027. Naval, land, and air defense — broadest BAE executive access possible." }
+  ]
+},
+  
     }
   }
 };
@@ -236,6 +291,18 @@ Object.values(BAE_DATA.divisions).forEach(d => {
     <div class="sidebar-item" onclick="switchSection(event,'hiring')">💼 Hiring Intelligence</div>
     <div class="sidebar-item" onclick="switchSection(event,'india')">🇮🇳 India Strategy</div>
     <div class="sidebar-item" onclick="switchSection(event,'competitive')">⚔️ Competitive Intel</div>
+  <div class="sidebar-section">
+    <div class="sidebar-label">Outreach Playbook</div>
+    <div class="sidebar-item" onclick="switchSection(event,'outreach')">🤝 Outreach Playbook <span style="background:#4caf50;color:#fff;padding:2px 7px;border-radius:10px;font-size:10px;font-weight:700;margin-left:4px;">Cold→Warm</span></div>
+  </div>
+  <div class="sidebar-section">
+    <div class="sidebar-label">Partnership &amp; Alliances</div>
+    <div class="sidebar-item" onclick="switchSection(event,'partnerships')">🤝 Partnerships &amp; Alliances</div>
+  </div>
+  <div class="sidebar-section">
+    <div class="sidebar-label">Industry Events</div>
+    <div class="sidebar-item" onclick="switchSection(event,'events')">📅 Industry Events</div>
+  </div>
   </div>
   <div class="sidebar-section">
     <div class="sidebar-label">Programs</div>
@@ -544,6 +611,33 @@ Object.values(BAE_DATA.divisions).forEach(d => {
   </div>
 </div>
 
+
+<!-- ═══ OUTREACH PLAYBOOK ═══ -->
+<div id="outreach" class="section">
+  <div class="section-title">🤝 Outreach Playbook — <span id="op-headline"></span></div>
+  <div id="op-badge" style="display:inline-block;background:#4caf50;color:#fff;padding:4px 14px;border-radius:20px;font-size:12px;font-weight:700;margin-bottom:22px;"></div>
+  <div id="op-triggers" class="grid-2" style="margin-bottom:28px;"></div>
+  <div class="card" style="border-top-color:#1a1a2e;">
+    <div class="card-title">Cold → Warm: 5-Step Sequence</div>
+    <div id="op-steps"></div>
+  </div>
+</div>
+
+<!-- ═══ PARTNERSHIPS ═══ -->
+<div id="partnerships" class="section">
+  <div class="section-title">🤝 Partnerships &amp; Alliances</div>
+  <div id="pw-cards" class="grid-2"></div>
+</div>
+
+<!-- ═══ EVENTS ═══ -->
+<div id="events" class="section">
+  <div class="section-title">📅 Industry Events — 2026 Calendar</div>
+  <div style="background:#fef3c7;border:1px solid #f59e0b;border-radius:8px;padding:12px 16px;margin-bottom:22px;font-size:12.5px;color:#92400e;">
+    🗓️ <strong>Why events matter:</strong> Pre-event outreach (2 weeks before each show) converts cold emails into scheduled meetings with procurement and engineering leadership.
+  </div>
+  <div id="ev-cards" class="grid-2"></div>
+</div>
+
 <!-- ══════ COMPETITIVE INTEL ══════ -->
 <div id="competitive" class="section">
   <div class="section-title">⚔️ Competitive Intelligence</div>
@@ -773,6 +867,41 @@ requestAnimationFrame(() => {
         plugins: { legend: { display: false }, tooltip: { callbacks: { label: ctx => ` ${ctx.label}: ${ctx.parsed}%` } } }
       }
     });
+
+  // ── Outreach / Partnerships / Events ────────────────────────────────
+  const op = BAE_DATA.outreachPlaybook;
+  if(op && document.getElementById('op-headline')) {
+    document.getElementById('op-headline').textContent = op.headline;
+    document.getElementById('op-badge').textContent    = op.badge;
+    document.getElementById('op-triggers').innerHTML   = op.triggers.map(t => `
+      <div class="card" style="border-top-color:#7c3aed;">
+        <div class="card-title">${t.icon} ${t.label}</div>
+        <p style="font-size:12.5px;line-height:1.7;color:#444;margin-bottom:10px;">${t.body}</p>
+        <div style="background:#f0fdf4;border-left:3px solid #22c55e;padding:8px 12px;border-radius:0 6px 6px 0;font-size:11.5px;color:#166534;font-weight:600;">⚡ Action: ${t.action}</div>
+      </div>`).join('');
+    document.getElementById('op-steps').innerHTML = op.coldToWarm.map(s => `
+      <div style="display:flex;gap:14px;align-items:flex-start;padding:12px 0;border-bottom:1px solid #f0f0f0;">
+        <div style="min-width:28px;height:28px;background:#7c3aed;color:#fff;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:700;">${s.step}</div>
+        <div><div style="font-size:13px;font-weight:700;color:#1a1a2e;margin-bottom:4px;">${s.label}</div>
+        <div style="font-size:12px;color:#555;line-height:1.6;">${s.body}</div></div>
+      </div>`).join('');
+    document.getElementById('pw-cards').innerHTML = BAE_DATA.partnerships.map(p => `
+      <div class="card" style="border-top-color:#0284c7;">
+        <div class="card-title">${p.name} <span class="tag">${p.type}</span> <span class="tag" style="background:#dcfce7;color:#166534;">${p.status}</span></div>
+        <p style="font-size:12.5px;line-height:1.7;color:#444;margin-bottom:10px;">${p.desc}</p>
+        <div style="background:#eff6ff;border-left:3px solid #0284c7;padding:8px 12px;border-radius:0 6px 6px 0;font-size:11.5px;color:#1e40af;font-weight:600;">🎯 Cyient Angle: ${p.angle}</div>
+      </div>`).join('');
+    document.getElementById('ev-cards').innerHTML = BAE_DATA.events.map(e => `
+      <div class="card" style="border-top-color:#d97706;">
+        <div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:8px;">
+          <div class="card-title" style="margin-bottom:0;">${e.name}</div>
+          <span style="font-size:12px;font-weight:700;">${e.priority}</span>
+        </div>
+        <div style="font-size:12px;color:#666;margin-bottom:6px;">📍 ${e.location} &nbsp;·&nbsp; 📅 ${e.date} &nbsp;·&nbsp; <span class="tag">${e.type}</span></div>
+        <p style="font-size:12.5px;line-height:1.7;color:#444;">${e.why}</p>
+      </div>`).join('');
+  }
+
   });
 });
 </script>
