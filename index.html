@@ -202,7 +202,7 @@ const BAE_DATA = {
         action:"Credential: reference Cyient's ITAR registration and existing defense program experience upfront in every BAE conversation." },
       { icon:"📡", label:"Electronic Systems Avionics Certification Backlog",
         body:"BAE Electronic Systems (Nashua NH) runs avionics programs for F-35, Eurofighter, naval electronic warfare. Cert documentation, DO-178C, DO-254 work is continuous and can be outsourced.",
-        action:"Target: TA Business Partners for Electronic Systems at Nashua NH and maritime at Govan UK. Lead with avionics cert track record." }
+        action:"Target: VP Engineering and Director Software Engineering at Nashua NH (Electronic Systems). Lead with DO-178C DAL A/B pedigree and F-35 EW program understanding." }
     ],
     coldToWarm: [
       { step:1, label:"Cold Signal Monitor", body:"Watch BAE press releases for Horizon Solutions updates, India announcements, new platform wins. Each is an outreach trigger." },
@@ -213,18 +213,30 @@ const BAE_DATA = {
     ]
   },
   partnerships: [
-    { name:"BAeHAL (Bangalore)", type:"JV / India Entity", status:"Active 30+ years",
-      desc:"BAE's 30-year India engineering JV providing embedded systems, simulation, IT, and tech pubs for Airbus, Rolls-Royce, HAL, ISRO, BEL.",
-      angle:"No Hyderabad presence. Cyient can be BAE's Hyderabad delivery partner — same BAeHAL model, different city. DRDO, HAL, BDL all co-located with Cyient HQ." },
-    { name:"Horizon Solutions (Aftermarket)", type:"Product Launch", status:"Launched Oct 2025",
-      desc:"New aftermarket avionics services and support brand launched at MRO Europe 2025. Engineering design, certification support, digital tools for commercial avionics aftermarket.",
-      angle:"Build-out phase = outsourced cert engineering demand. Cyient has the DO-178C / DO-254 capability and AS9100D certification to support this." },
-    { name:"MBDA (Missile Systems JV)", type:"Defense JV", status:"Active",
-      desc:"BAE holds stake in MBDA alongside Airbus and Leonardo. Missile guidance, avionics, and propulsion — advanced engineering programs requiring rigorous documentation.",
-      angle:"Tech pubs, MBSE, and systems engineering for guided weapons programs. ITAR-compliant delivery required — Cyient's ITAR registration is the credential." },
-    { name:"Rolls-Royce (Eurofighter EJ200)", type:"Platform Partner", status:"Active",
-      desc:"Eurofighter Typhoon program: BAE (airframe), Rolls-Royce (EJ200 engine), Leonardo, Airbus Defence. Multi-decade support and upgrade programs ongoing.",
-      angle:"Eurofighter upgrade programs = continuous tech pubs, structural analysis, and certification documentation. Cyient's Rolls-Royce relationship is the warm intro path." }
+    { name:"General Dynamics Land Systems (GDLS)", type:"Program Partner", status:"Active — Sterling Heights MI",
+      desc:"Co-develop M2 Bradley IFV upgrades, Optionally Manned Fighting Vehicle (OMFV) competition teaming. BAE's Platforms & Services (York PA, Sterling Heights MI) relies on GDLS supply chain and sub-system integration.",
+      angle:"OMFV and Bradley digitization = continuous systems engineering, software integration, and MBSE work. Entry via P&S York PA workforce leads — Cyient MBSE/SysML practice maps directly." },
+    { name:"Raytheon / RTX", type:"F-35 & EW Integration", status:"Active — Nashua NH",
+      desc:"Joint F-35 avionics and electronic warfare integration. BAE Electronic Systems (Nashua NH) supplies EW suite (AN/ASQ-239); RTX supplies radar and EO/IR. Deep integration at Nashua NH site.",
+      angle:"F-35 EW software = DO-178C DAL A requirement. Cyient's DO-178C practice and Nashua NH presence (CHIPS expansion) is the wedge. Target VP Engineering and Director SW Engineering at Electronic Systems." },
+    { name:"Leonardo DRS", type:"US Defense Electronics", status:"Active — Washington DC metro",
+      desc:"Former BAE subsidiary, now independent US defense electronics company (Leonardo SpA subsidiary). Shares heritage programs — vehicle electronics, force protection, naval systems — with BAE North America.",
+      angle:"Leonardo DRS and BAE share legacy programs and supply chain. DRS presence at Fort Wayne IN and Melbourne FL = warm intro path via existing Cyient DRS relationship." },
+    { name:"L3Harris Technologies", type:"Electronic Warfare Teaming", status:"Active — Melbourne FL / Rochester NY",
+      desc:"BAE and L3Harris team on EW programs including EPAWSS (F-15EX electronic attack system). Overlapping capabilities in communications, signals intelligence, and EW at BAE Electronic Systems.",
+      angle:"L3Harris is already a Cyient customer for avionics engineering. Use L3Harris Program Managers as BAE Electronic Systems referral path — same program ecosystem." },
+    { name:"Northrop Grumman", type:"GCAP & F-35 Systems", status:"Active — Linthicum MD",
+      desc:"GCAP (Global Combat Air Programme) systems integration, F-35 mission systems supplier. BAE (UK Air) and Northrop team on next-gen airborne systems including radar and sensor fusion.",
+      angle:"GCAP digital engineering = MBSE/SysML demand. Northrop Grumman Enterprise Services (formerly Xchanging) relationship gives Cyient a foothold into GCAP supply chain conversations." },
+    { name:"Microsoft (Azure Defense)", type:"Cloud & Digital Engineering", status:"Active — BAE Systems Inc.",
+      desc:"BAE Systems Inc. runs Azure-based secure cloud infrastructure for US defense programs (classified workloads, digital engineering, simulation). Active rollout at Electronic Systems and I&S divisions.",
+      angle:"Azure-hosted DO-178C tool chains and MBSE platforms = Cyient's managed engineering services opportunity. Target the BAE Digital Engineering lead at Falls Church VA HQ." },
+    { name:"Palantir Technologies", type:"AI/Data Analytics", status:"Expanding — BAE Systems & USAF",
+      desc:"Palantir AIP (Artificial Intelligence Platform) deployed across BAE defense programs for logistics, maintenance prediction, and supply chain intelligence. BAE signed expanded agreement in 2025.",
+      angle:"Palantir deployment = data engineering and integration work. Cyient's digital services practice can support data pipeline and API integration for BAE's Palantir rollout." },
+    { name:"Quest Global (post Alpha-Numero)", type:"⚠️ COMPETITOR — Monitor Closely", status:"Growing presence at BAE Inc.",
+      desc:"Quest Global acquired Alpha-Numero (Canadian A&D ER&D firm) and now has expanded North American defense ER&D capability. Quest is actively targeting BAE Electronic Systems (Nashua NH), Platforms & Services (York PA), and I&S (Herndon VA). Quest pitches embedded software, avionics, and EW engineering — direct overlap with Cyient's core BAE pitch.",
+      angle:"THREAT: Quest now has US defense engineering depth post Alpha-Numero. Counter: Cyient's Hyderabad delivery (no Quest office), DO-178C DAL A/B depth, and AS9100D credentials beat Quest on cost and certification pedigree. Emphasize Cyient's 20-year BAeHAL program knowledge." }
   ],
   events: [
     { name:"MRO Americas", date:"Apr 21–23, 2026", location:"Orlando, FL",
@@ -640,28 +652,68 @@ Object.values(BAE_DATA.divisions).forEach(d => {
 
 <!-- ══════ COMPETITIVE INTEL ══════ -->
 <div id="competitive" class="section">
-  <div class="section-title">⚔️ Competitive Intelligence</div>
-  <div style="background:linear-gradient(135deg,#7b1fa2,#9c27b0);border-radius:10px;padding:13px 16px;margin-bottom:20px;color:#fff;">
-    <div style="font-size:12px;font-weight:700;margin-bottom:5px;">👁️ COMPETITOR WATCH — Verify Global (verifyglobal.com)</div>
-    <div style="font-size:11px;line-height:1.65;opacity:.93;">Verify Global (HQ: Costa Mesa CA) specializes in Supplier Quality Management — FAI (AS9102), PPAP, AS9145 audits, capability assessments, corrective action management. 400+ customers · 7,000+ supplier locations · 50 countries · 8,000+ field resources. <strong>Overlap at BAE: York PA land systems supply chain quality, Nashua NH electronic components supplier FAI.</strong> No India office — Cyient's India delivery is the key differentiator. Cyient counter: full engineering scope + India delivery + long-term program embedding.</div>
+  <div class="section-title">⚔️ Competitive Intelligence — BAE Systems North America</div>
+
+  <!-- QUEST GLOBAL SPOTLIGHT -->
+  <div style="background:linear-gradient(135deg,#b91c1c,#dc2626);border-radius:10px;padding:14px 18px;margin-bottom:18px;color:#fff;">
+    <div style="font-size:13px;font-weight:800;margin-bottom:6px;">🚨 PRIORITY WATCH — Quest Global (post Alpha-Numero Acquisition)</div>
+    <div style="font-size:12px;line-height:1.7;opacity:.95;">Quest Global acquired <strong>Alpha-Numero</strong> (Canadian A&amp;D ER&amp;D firm, ~400 engineers, strong defense electronics) — significantly expanding Quest's North American defense engineering footprint. Quest now targets <strong>BAE Electronic Systems (Nashua NH), Platforms &amp; Services (York PA), and Intelligence &amp; Security (Herndon VA)</strong> with embedded software, avionics, and EW engineering services. Quest's revised pitch: North American delivery + offshore India blended model. <strong>Cyient counter:</strong> Hyderabad delivery (Quest has no Hyderabad office), DO-178C DAL A/B depth, BAeHAL program knowledge, S1000D tech pubs, and ITAR-registered status. Beat Quest on cost-quality blend and certification pedigree.</div>
   </div>
-  <div class="grid-2">
+
+  <!-- Verify Global secondary watch -->
+  <div style="background:linear-gradient(135deg,#6d28d9,#7c3aed);border-radius:10px;padding:12px 16px;margin-bottom:18px;color:#fff;">
+    <div style="font-size:12px;font-weight:700;margin-bottom:4px;">👁️ SECONDARY WATCH — Verify Global</div>
+    <div style="font-size:11px;line-height:1.65;opacity:.93;">Verify Global (Costa Mesa CA) — Supplier Quality Management (FAI AS9102, PPAP, AS9145). Overlap at <strong>York PA (land systems supply quality)</strong> and <strong>Nashua NH (electronic components FAI)</strong>. No India office — Cyient's India delivery is the differentiator for full-scope engineering beyond quality audits.</div>
+  </div>
+
+  <div class="grid-2" style="margin-bottom:20px;">
+    <!-- Competitors column -->
     <div class="card">
-      <div class="card-title">Key Competitors at BAE Systems</div>
+      <div class="card-title">Competitors at BAE Systems North America</div>
       <div style="font-size:12px;line-height:1.8;">
-        <div style="padding:8px;background:#fdecea;border-radius:6px;margin-bottom:8px;border-left:3px solid #c62828;"><strong style="color:#c62828;">🔴 HIGH THREAT</strong><br/><strong>LTTS (L&T Technology Services)</strong> — Strong India A&D base, compete at BAE India and Air division. Aggressive pricing.<br/><strong>HCL Engineering</strong> — BAE existing vendor. PLM, digital engineering, embedded systems.</div>
-        <div style="padding:8px;background:#fff3e0;border-radius:6px;margin-bottom:8px;border-left:3px solid #e65100;"><strong style="color:#e65100;">🟡 MEDIUM THREAT</strong><br/><strong>Alten / Altran (Capgemini)</strong> — European engineering staffing, active at Warton/Samlesbury.<br/><strong>QinetiQ</strong> — UK defense engineering consultancy, competes on Air and Maritime advisory work.</div>
-        <div style="padding:8px;background:#e8f5e9;border-radius:6px;border-left:3px solid #1b5e20;"><strong style="color:#1b5e20;">🟢 Cyient Advantage</strong><br/>India delivery (Hyderabad gap), DO-178C certification depth, AS9100/NADCAP credentials, and tech pubs (S1000D) across all BAE divisions.</div>
+        <div style="padding:10px;background:#fdecea;border-radius:6px;margin-bottom:10px;border-left:3px solid #c62828;">
+          <strong style="color:#c62828;">🔴 HIGH THREAT — US Sites</strong><br/>
+          <strong>Quest Global (post Alpha-Numero)</strong> — Expanded NA defense ER&amp;D. Targeting Nashua NH, York PA, Herndon VA. Embedded SW, avionics, EW.<br/>
+          <strong>LTTS (L&amp;T Technology Services)</strong> — India A&amp;D anchor, competing at BAE India (BAeHAL programs) and US programs via offshore delivery. Aggressive on pricing.<br/>
+          <strong>HCL Engineering Services</strong> — Confirmed BAE vendor. PLM administration, digital engineering, embedded systems at multiple US sites.
+        </div>
+        <div style="padding:10px;background:#fff3e0;border-radius:6px;margin-bottom:10px;border-left:3px solid #e65100;">
+          <strong style="color:#e65100;">🟡 MEDIUM THREAT — Niche US Programs</strong><br/>
+          <strong>SAIC / Leidos Engineering</strong> — US defense IT and some engineering services overlap at I&amp;S division (Herndon VA). Government-cleared engineering teams.<br/>
+          <strong>Booz Allen Hamilton (Engineering)</strong> — Advisory + program management at BAE Systems I&amp;S; limited ER&amp;D overlap but growing engineering practice.<br/>
+          <strong>Alten (Capgemini Engineering)</strong> — European staffing firm; limited US presence but active at BAE Air (Warton UK) — low US risk today.
+        </div>
+        <div style="padding:10px;background:#e8f5e9;border-radius:6px;border-left:3px solid #1b5e20;">
+          <strong style="color:#1b5e20;">🟢 Cyient Position</strong><br/>
+          Hyderabad delivery (zero competitor has this), DO-178C DAL A/B, S1000D tech pubs, ITAR-registered, AS9100/NADCAP, BAeHAL program DNA.
+        </div>
       </div>
     </div>
+
+    <!-- Cyient Differentiation -->
     <div class="card">
-      <div class="card-title">Cyient Differentiation at BAE</div>
-      <div style="font-size:12px;line-height:1.8;color:#444;">
-        <div style="margin-bottom:8px;">✅ Only major A&D engineering firm with <strong>Hyderabad HQ</strong> — matching BAE India's gap perfectly</div>
-        <div style="margin-bottom:8px;">✅ DO-178C DAL A/B practice — directly maps to GCAP, Typhoon ECRS Mk2, F-35 EW SW needs</div>
-        <div style="margin-bottom:8px;">✅ S1000D technical publications — all BAE platforms use S1000D (F-35, Type 26, Typhoon)</div>
-        <div style="margin-bottom:8px;">✅ AS9100/NADCAP quality credentials — York PA, Nashua NH supplier quality</div>
-        <div>✅ CATIA V5/V6 + MBSE/SysML — GCAP digital engineering and Typhoon design augmentation</div>
+      <div class="card-title">Cyient Win Angles — BAE North America</div>
+      <div style="font-size:12px;line-height:1.9;color:#444;">
+        <div style="padding:8px 0;border-bottom:1px solid #f0f0f0;display:flex;gap:10px;">
+          <span style="color:#16a34a;font-size:14px;flex-shrink:0;">✅</span>
+          <div><strong>Nashua NH (Electronic Systems):</strong> DO-178C DAL A/B embedded SW for F-35 AN/ASQ-239 EW suite. CHIPS-funded expansion = 500+ engineering roles. Quest Global is the primary threat here — counter with certification depth and India cost.</div>
+        </div>
+        <div style="padding:8px 0;border-bottom:1px solid #f0f0f0;display:flex;gap:10px;">
+          <span style="color:#16a34a;font-size:14px;flex-shrink:0;">✅</span>
+          <div><strong>York PA / Sterling Heights MI (P&amp;S):</strong> MBSE/SysML for OMFV and Bradley digitization. Systems engineering documentation, digital twin. HCL is incumbent — differentiate on MBSE depth and cost efficiency.</div>
+        </div>
+        <div style="padding:8px 0;border-bottom:1px solid #f0f0f0;display:flex;gap:10px;">
+          <span style="color:#16a34a;font-size:14px;flex-shrink:0;">✅</span>
+          <div><strong>Norfolk VA (Ship Repair):</strong> S1000D technical publications for naval MRO. No India competitor covers naval S1000D at scale — Cyient's clearest whitespace at BAE.</div>
+        </div>
+        <div style="padding:8px 0;border-bottom:1px solid #f0f0f0;display:flex;gap:10px;">
+          <span style="color:#16a34a;font-size:14px;flex-shrink:0;">✅</span>
+          <div><strong>Hyderabad Delivery:</strong> BAeHAL covers Bangalore only. Cyient is the only A&amp;D engineering firm with Hyderabad HQ — pitch as BAE's second India city extension with DRDO/HAL co-location advantage.</div>
+        </div>
+        <div style="padding:8px 0;display:flex;gap:10px;">
+          <span style="color:#16a34a;font-size:14px;flex-shrink:0;">✅</span>
+          <div><strong>Quest Counter Playbook:</strong> Quest/Alpha-Numero = NA delivery + India blend but NO Hyderabad, NO S1000D pubs depth, weaker DO-178C DAL A pedigree. Lead with certification credentials and Cyient's 20-year BAeHAL program DNA.</div>
+        </div>
       </div>
     </div>
   </div>
@@ -702,25 +754,137 @@ Object.values(BAE_DATA.divisions).forEach(d => {
 
 <!-- ══════ CONTACTS ══════ -->
 <div id="contacts" class="section">
-  <div class="section-title">👥 Key Contacts — BAE Systems</div>
-  <div style="background:#fff3cd;border:1px solid #ffc107;border-radius:8px;padding:12px 16px;margin-bottom:22px;font-size:12px;color:#856404;">⚠️ Verify all contacts on LinkedIn before outreach. BAE TA is organized by division and site. Entry point: target TA Business Partners by site — Nashua NH (Electronic Systems), York PA (Platforms), Warton UK (Air), Govan UK (Maritime).</div>
-  <div class="grid-2">
-    <div>
-      <div style="font-size:13px;font-weight:700;color:#1d4ed8;margin-bottom:10px;">Air Division — Warton/Samlesbury UK</div>
-      <div class="contact-card" style="border-left-color:#1d4ed8;"><div class="contact-name">Air Division TA Business Partner</div><div class="contact-title">GCAP / Typhoon / F-35 Engineering Staffing</div><div class="contact-location">Warton, Lancashire UK · Search "BAE Systems Air TA Warton"</div></div>
-      <div style="font-size:13px;font-weight:700;color:#0e7490;margin-bottom:10px;margin-top:16px;">Electronic Systems — Nashua NH</div>
-      <div class="contact-card" style="border-left-color:#0e7490;"><div class="contact-name">Electronic Systems TA BP — Nashua NH</div><div class="contact-title">F-35 EW / MMIC / C4ISR Engineering Staffing</div><div class="contact-location">Nashua NH · CHIPS-funded expansion · Most active US hiring site</div></div>
+  <div class="section-title">👥 Key Contacts — BAE Systems Inc. (North America)</div>
+  <div style="background:#dbeafe;border:1px solid #3b82f6;border-radius:8px;padding:12px 16px;margin-bottom:22px;font-size:12px;color:#1e3a8a;">
+    🎯 <strong>Target: Engineering &amp; Operations Buyers</strong> — VP Engineering, Director Engineering, VP Operations, VP IT, VP Aftermarket and their full org down to Managers. BAE Systems Inc. (Falls Church VA HQ) operates 111 US sites with 40,000+ engineers. Primary sites: Nashua NH (Electronic Systems), York PA + Sterling Heights MI (Platforms &amp; Services), Herndon VA (Intelligence &amp; Security), Norfolk VA (Ship Repair).
+  </div>
+
+  <!-- BAE Systems Inc. HQ -->
+  <div style="font-size:14px;font-weight:800;color:#1d4ed8;margin-bottom:12px;padding-bottom:6px;border-bottom:2px solid #dbeafe;">🏛️ BAE Systems Inc. — Corporate, Falls Church VA</div>
+  <div class="grid-2" style="margin-bottom:24px;">
+    <div class="contact-card" style="border-left-color:#1d4ed8;">
+      <div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:4px;">
+        <div class="contact-name">Tom Arseneault</div>
+        <span class="tag" style="background:#dbeafe;color:#1d4ed8;font-size:10px;">C-Suite</span>
+      </div>
+      <div class="contact-title">President &amp; CEO, BAE Systems Inc.</div>
+      <div class="contact-location">📍 Falls Church, VA · Former CFO BAE Inc. · Drives US defense strategy and engineering investment</div>
+      <div style="margin-top:6px;font-size:11px;color:#4b5563;">🎯 Strategic pitch: US engineering workforce scale-up — CHIPS, OMFV, F-35 program ramp</div>
     </div>
-    <div>
-      <div style="font-size:13px;font-weight:700;color:#0f766e;margin-bottom:10px;">Maritime — Govan / Barrow UK</div>
-      <div class="contact-card" style="border-left-color:#0f766e;"><div class="contact-name">Maritime TA Business Partner</div><div class="contact-title">Type 26 / Submarine Engineering Staffing</div><div class="contact-location">Govan, Glasgow · Search "BAE Systems Maritime TA Govan"</div></div>
-      <div style="font-size:13px;font-weight:700;color:#6b21a8;margin-bottom:10px;margin-top:16px;">India — BAeHAL / Hyderabad</div>
-      <div class="contact-card"><div class="contact-name">BAE Systems India Country Head</div><div class="contact-title">India Strategy & Partnerships</div><div class="contact-location">New Delhi / Bangalore · Key contact for Hyderabad expansion pitch</div></div>
-      <div class="contact-card"><div class="contact-name">Dr. Charles Woodburn</div><div class="contact-title">CEO, BAE Systems plc.</div><div class="contact-location">London UK · CEO since July 2017 · Background in defense, aerospace, oil & gas</div></div>
+    <div class="contact-card" style="border-left-color:#1d4ed8;">
+      <div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:4px;">
+        <div class="contact-name">SVP Engineering / CTO, BAE Systems Inc.</div>
+        <span class="tag" style="background:#f0fdf4;color:#166534;font-size:10px;">Primary Target</span>
+      </div>
+      <div class="contact-title">Enterprise Engineering Strategy · Digital Engineering · All Divisions</div>
+      <div class="contact-location">📍 Falls Church, VA · Search: "BAE Systems CTO" or "SVP Engineering BAE Systems Inc" on LinkedIn</div>
+      <div style="margin-top:6px;font-size:11px;color:#4b5563;">🎯 Enterprise ER&amp;D partnership, digital engineering tools, MBSE rollout across all US divisions</div>
     </div>
   </div>
-</div>
 
+  <!-- Electronic Systems Nashua NH -->
+  <div style="font-size:14px;font-weight:800;color:#0e7490;margin-bottom:12px;padding-bottom:6px;border-bottom:2px solid #cffafe;">⚡ Electronic Systems — Nashua, NH <span style="font-size:11px;font-weight:600;background:#fef3c7;color:#92400e;padding:2px 8px;border-radius:10px;margin-left:8px;">🔥 HOTTEST SITE</span></div>
+  <div class="grid-2" style="margin-bottom:24px;">
+    <div class="contact-card" style="border-left-color:#0e7490;">
+      <div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:4px;">
+        <div class="contact-name">VP Engineering, Electronic Systems</div>
+        <span class="tag" style="background:#f0fdf4;color:#166534;font-size:10px;">Primary Target</span>
+      </div>
+      <div class="contact-title">F-35 EW Suite (AN/ASQ-239) · MMIC · AESA Radar · C4ISR — Nashua NH</div>
+      <div class="contact-location">📍 Nashua, NH · 2,500+ engineers on-site · CHIPS-funded expansion program · Search: "VP Engineering BAE Electronic Systems"</div>
+      <div style="margin-top:6px;font-size:11px;color:#4b5563;">🎯 DO-178C DAL A embedded SW for F-35 EW — Cyient's deepest technical match. Direct pitch to VP Eng org.</div>
+    </div>
+    <div class="contact-card" style="border-left-color:#0e7490;">
+      <div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:4px;">
+        <div class="contact-name">Director, Software Engineering — Electronic Systems</div>
+        <span class="tag" style="background:#f0fdf4;color:#166534;font-size:10px;">Hot Target</span>
+      </div>
+      <div class="contact-title">Embedded Software · DO-178C · F-35 EW / MMIC Engineering Programs</div>
+      <div class="contact-location">📍 Nashua, NH · Search: "Director Software Engineering BAE Electronic Systems Nashua"</div>
+      <div style="margin-top:6px;font-size:11px;color:#4b5563;">🎯 CHIPS expansion = 500+ SW engineering roles open — multi-year volume opportunity. Entry via Director SW Eng.</div>
+    </div>
+    <div class="contact-card" style="border-left-color:#0e7490;">
+      <div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:4px;">
+        <div class="contact-name">Director, Systems Engineering — Electronic Systems</div>
+        <span class="tag" style="background:#ede9fe;color:#6d28d9;font-size:10px;">Target</span>
+      </div>
+      <div class="contact-title">AESA Radar Systems · MMIC Integration · Sensor Fusion — MBSE programs</div>
+      <div class="contact-location">📍 Nashua, NH · Search: "Director Systems Engineering BAE Electronic Systems"</div>
+      <div style="margin-top:6px;font-size:11px;color:#4b5563;">🎯 MBSE/SysML engineering services for radar and EW systems integration</div>
+    </div>
+    <div class="contact-card" style="border-left-color:#0e7490;">
+      <div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:4px;">
+        <div class="contact-name">VP Operations, Electronic Systems</div>
+        <span class="tag" style="background:#ede9fe;color:#6d28d9;font-size:10px;">Target</span>
+      </div>
+      <div class="contact-title">Manufacturing Engineering · Supply Chain · AS9100 Quality — Nashua NH</div>
+      <div class="contact-location">📍 Nashua, NH · Search: "VP Operations BAE Electronic Systems Nashua"</div>
+      <div style="margin-top:6px;font-size:11px;color:#4b5563;">🎯 AS9100/NADCAP quality engineering, manufacturing process documentation</div>
+    </div>
+  </div>
+
+  <!-- Platforms & Services -->
+  <div style="font-size:14px;font-weight:800;color:#7c3aed;margin-bottom:12px;padding-bottom:6px;border-bottom:2px solid #ede9fe;">🚛 Platforms &amp; Services — York PA · Sterling Heights MI</div>
+  <div class="grid-2" style="margin-bottom:24px;">
+    <div class="contact-card" style="border-left-color:#7c3aed;">
+      <div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:4px;">
+        <div class="contact-name">VP Engineering, Platforms &amp; Services</div>
+        <span class="tag" style="background:#f0fdf4;color:#166534;font-size:10px;">Primary Target</span>
+      </div>
+      <div class="contact-title">M109 Paladin · Bradley IFV · OMFV · M88 Recovery Vehicle Engineering</div>
+      <div class="contact-location">📍 York, PA (primary) · Sterling Heights, MI · Search: "VP Engineering BAE Platforms Services"</div>
+      <div style="margin-top:6px;font-size:11px;color:#4b5563;">🎯 OMFV program ramp: MBSE/SysML, digital twin, systems engineering documentation</div>
+    </div>
+    <div class="contact-card" style="border-left-color:#7c3aed;">
+      <div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:4px;">
+        <div class="contact-name">Director Engineering, Combat Vehicles</div>
+        <span class="tag" style="background:#ede9fe;color:#6d28d9;font-size:10px;">Target</span>
+      </div>
+      <div class="contact-title">Bradley IFV / OMFV / Paladin Systems Engineering — York PA &amp; Sterling Heights MI</div>
+      <div class="contact-location">📍 York, PA / Sterling Heights, MI · Search: "Director Engineering BAE Systems York PA" or "Sterling Heights"</div>
+      <div style="margin-top:6px;font-size:11px;color:#4b5563;">🎯 Army Next Generation Combat Vehicle: sustained multi-year SE and certification volume</div>
+    </div>
+  </div>
+
+  <!-- I&S + Ship Repair -->
+  <div class="grid-2" style="margin-bottom:24px;">
+    <div>
+      <div style="font-size:13px;font-weight:800;color:#0f766e;margin-bottom:10px;padding-bottom:5px;border-bottom:1px solid #ccfbf1;">🔐 Intelligence &amp; Security — Herndon VA</div>
+      <div class="contact-card" style="border-left-color:#0f766e;">
+        <div class="contact-name">VP Engineering, Intelligence &amp; Security</div>
+        <div class="contact-title">Cyber · SIGINT · C2 Systems Engineering · Software-Intensive Programs</div>
+        <div class="contact-location">📍 Herndon, VA · McLean, VA · Search: "VP Engineering BAE Intelligence Security"</div>
+        <div style="margin-top:6px;font-size:11px;color:#4b5563;">🎯 ITAR-cleared engineering services — Cyient ITAR registration + US-compliant delivery model</div>
+      </div>
+      <div class="contact-card" style="border-left-color:#0f766e;">
+        <div class="contact-name">Director IT, BAE Systems Inc.</div>
+        <div class="contact-title">Enterprise IT / Cloud / Digital Engineering Infrastructure</div>
+        <div class="contact-location">📍 Falls Church, VA / Herndon, VA · Search: "BAE Systems Director IT" or "VP IT"</div>
+        <div style="margin-top:6px;font-size:11px;color:#4b5563;">🎯 Azure-based digital engineering platform rollout — managed IT engineering services</div>
+      </div>
+    </div>
+    <div>
+      <div style="font-size:13px;font-weight:800;color:#b45309;margin-bottom:10px;padding-bottom:5px;border-bottom:1px solid #fef3c7;">⚓ Ship Repair — Norfolk VA · Jacksonville FL · San Diego CA</div>
+      <div class="contact-card" style="border-left-color:#b45309;">
+        <div class="contact-name">VP Operations / VP Engineering, Ship Repair</div>
+        <div class="contact-title">Naval MRO Engineering · Technical Publications · AS9100 Quality</div>
+        <div class="contact-location">📍 Norfolk, VA (largest site) · Search: "VP Operations BAE Systems Ship Repair Norfolk"</div>
+        <div style="margin-top:6px;font-size:11px;color:#4b5563;">🎯 S1000D tech pubs for US Navy MRO — zero India competitor covers naval S1000D at scale</div>
+      </div>
+      <div class="contact-card" style="border-left-color:#b45309;">
+        <div class="contact-name">Director Engineering, Ship Repair</div>
+        <div class="contact-title">Dry-dock Engineering · Navy Vessel Upgrades · Technical Documentation</div>
+        <div class="contact-location">📍 Norfolk, VA / Jacksonville, FL · Search: "Director Engineering BAE Ship Repair"</div>
+        <div style="margin-top:6px;font-size:11px;color:#4b5563;">🎯 Continuous MRO engineering documentation — highest margin Cyient whitespace at BAE</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- India Bridge -->
+  <div style="background:#f9fafb;border:1px solid #e5e7eb;border-radius:8px;padding:12px 16px;font-size:12px;color:#374151;">
+    <strong>🇮🇳 India Delivery Bridge:</strong> BAeHAL (Bangalore) is BAE's 30-year India engineering JV — embedded systems, simulation, tech pubs. BAeHAL has <em>no Hyderabad presence</em>. Pitch Cyient as BAE's Hyderabad engineering delivery arm — DRDO, HAL, BDL all co-located with Cyient HQ. Entry through VP Engineering BAE Systems Inc. (Falls Church) or VP Engineering Electronic Systems (Nashua NH).
+  </div>
+</div>
 <!-- ══════ SKILLS ══════ -->
 <div id="skills" class="section">
   <div class="section-title">⚡ Fast-Sell Skills for BAE Systems</div>
