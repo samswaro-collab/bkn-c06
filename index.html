@@ -1,0 +1,780 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>BAE Systems | BEAKON Sales Intelligence Dashboard</title>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.9.1/chart.min.js"></script>
+<style>
+*{margin:0;padding:0;box-sizing:border-box;}
+body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;background:#f5f5f5;color:#333;overflow-x:hidden;}
+.topbar{background:#1a1a2e;color:white;padding:12px 20px;display:flex;align-items:center;gap:20px;border-bottom:3px solid #6b21a8;position:sticky;top:0;z-index:100;}
+.logo-pill{background:white;color:#6b21a8;padding:6px 12px;border-radius:20px;font-weight:bold;font-size:13px;}
+.topbar-title{flex:1;font-size:18px;font-weight:600;}
+.pill{background:rgba(255,255,255,0.15);padding:5px 10px;border-radius:15px;font-size:12px;}
+.pill-status{background:#4caf50;padding:5px 10px;border-radius:15px;font-size:12px;}
+.refresh-banner{background:#6b21a8;color:white;padding:10px 20px;display:flex;justify-content:space-between;align-items:center;font-size:13px;position:sticky;top:50px;z-index:99;}
+.container{display:flex;min-height:calc(100vh - 80px);}
+.sidebar{width:240px;background:#1a1a2e;color:white;padding:20px 0;overflow-y:auto;height:calc(100vh - 80px);position:sticky;top:80px;}
+.sidebar-label{font-size:11px;font-weight:700;text-transform:uppercase;color:#999;padding:0 15px;margin-bottom:8px;letter-spacing:0.5px;}
+.sidebar-section{margin-bottom:22px;}
+.sidebar-item{padding:10px 15px;cursor:pointer;font-size:13px;transition:all 0.2s;border-left:3px solid transparent;}
+.sidebar-item:hover{background:rgba(107,33,168,0.15);}
+.sidebar-item.active{background:rgba(107,33,168,0.25);border-left-color:#6b21a8;font-weight:600;}
+.sidebar-meta{font-size:10px;color:#aaa;padding:2px 15px 8px 15px;line-height:1.4;}
+.main-content{flex:1;padding:30px;overflow-y:auto;height:calc(100vh - 80px);}
+.section{display:none;}
+.section.active{display:block;}
+.section-title{font-size:24px;font-weight:700;margin-bottom:25px;color:#1a1a2e;}
+.grid-2{display:grid;grid-template-columns:repeat(2,1fr);gap:20px;margin-bottom:25px;}
+.grid-3{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;margin-bottom:25px;}
+.grid-4{display:grid;grid-template-columns:repeat(4,1fr);gap:20px;margin-bottom:25px;}
+.card{background:white;border-radius:8px;padding:20px;box-shadow:0 1px 3px rgba(0,0,0,0.1);border-top:3px solid #6b21a8;}
+.card-title{font-size:13px;font-weight:700;text-transform:uppercase;color:#666;margin-bottom:15px;letter-spacing:0.5px;}
+.kpi{font-size:32px;font-weight:700;color:#1a1a2e;margin-bottom:5px;}
+.kpi-label{font-size:12px;color:#999;}
+.kpi-change{font-size:12px;color:#4caf50;margin-top:5px;}
+.tag{display:inline-block;background:#f0f0f0;color:#333;padding:4px 10px;border-radius:12px;font-size:11px;font-weight:600;margin-right:6px;margin-bottom:6px;}
+.tag-accent{background:rgba(107,33,168,0.12);color:#6b21a8;}
+.tag-hot{background:#fdecea;color:#c62828;}
+.contact-card{background:white;border-radius:6px;padding:15px;border-left:3px solid #6b21a8;margin-bottom:12px;font-size:12px;}
+.contact-name{font-weight:600;color:#1a1a2e;margin-bottom:2px;}
+.contact-title{color:#666;font-size:11px;margin-bottom:5px;}
+.contact-location{color:#999;font-size:10px;}
+.prog-row{margin-bottom:15px;}
+.prog-label{display:flex;justify-content:space-between;font-size:11px;font-weight:600;color:#666;margin-bottom:5px;}
+.prog-bar{width:100%;height:8px;background:#e0e0e0;border-radius:4px;overflow:hidden;}
+.prog-fill{height:100%;background:#6b21a8;border-radius:4px;}
+.loc-us{background:#dbeafe;color:#1e40af;padding:2px 7px;border-radius:10px;font-size:10px;font-weight:700;}
+.loc-uk{background:#fce7f3;color:#9d174d;padding:2px 7px;border-radius:10px;font-size:10px;font-weight:700;}
+.loc-india{background:#fef3c7;color:#92400e;padding:2px 7px;border-radius:10px;font-size:10px;font-weight:700;}
+
+/* ── DIVISION OVERVIEW GRID (matches slide layout) ── */
+.divisions-overview{display:grid;grid-template-columns:repeat(5,1fr);gap:14px;margin-bottom:20px;}
+.div-card{background:white;border-radius:10px;overflow:hidden;box-shadow:0 2px 6px rgba(0,0,0,0.1);}
+.div-header{padding:12px 10px;text-align:center;font-size:13px;font-weight:700;color:white;}
+.div-stats{padding:10px 12px;text-align:center;font-size:11px;font-weight:600;line-height:1.8;}
+.div-chart-wrap{padding:6px 10px;position:relative;height:170px;display:flex;align-items:center;justify-content:center;}
+.div-chart-wrap canvas{max-width:150px;max-height:150px;}
+.div-legend{padding:8px 10px 10px;font-size:10px;line-height:1.7;}
+.div-legend-row{display:flex;justify-content:space-between;border-bottom:1px solid #f0f0f0;padding:1px 0;}
+.div-legend-label{display:flex;align-items:center;gap:4px;color:#444;}
+.div-legend-dot{width:8px;height:8px;border-radius:50%;flex-shrink:0;}
+.div-legend-pct{font-weight:700;color:#1a1a2e;}
+.div-center-label{position:absolute;text-align:center;pointer-events:none;}
+.div-center-rev{font-size:13px;font-weight:800;color:#1a1a2e;}
+.div-center-d{font-size:10px;color:#6b21a8;font-weight:700;}
+
+/* entities bar */
+.entities-bar{display:grid;grid-template-columns:1fr auto 1fr;gap:16px;align-items:center;margin-bottom:22px;}
+.entity-box{background:white;border-radius:8px;padding:14px 18px;box-shadow:0 1px 3px rgba(0,0,0,0.1);border-left:4px solid #6b21a8;}
+.entity-name{font-size:13px;font-weight:800;color:#1a1a2e;}
+.entity-sub{font-size:11px;color:#6b21a8;font-weight:600;margin-top:2px;}
+.sites-box{background:linear-gradient(135deg,#6b21a8,#7e22ce);color:white;border-radius:8px;padding:14px 18px;text-align:center;font-size:11px;font-weight:700;line-height:1.8;}
+
+::-webkit-scrollbar{width:8px;}::-webkit-scrollbar-track{background:#f1f1f1;}::-webkit-scrollbar-thumb{background:#6b21a8;border-radius:4px;}
+@media(max-width:1400px){.divisions-overview{grid-template-columns:repeat(3,1fr);}.grid-4{grid-template-columns:repeat(2,1fr);}}
+@media(max-width:1100px){.divisions-overview{grid-template-columns:repeat(2,1fr);}}
+</style>
+</head>
+<body>
+
+<!-- ══ DYNAMIC DATA STORE — updated by refresh script every 5 days ══ -->
+<script>
+// ─────────────────────────────────────────────────────────────────
+// BAE_DATA: All numbers that change on a 5-day refresh cycle.
+// Source: BAE Systems plc Annual Report 2025 (FY Feb 2026)
+// Run data_refresh_bae.py to update these values.
+// ─────────────────────────────────────────────────────────────────
+const BAE_DATA = {
+  lastRefreshed: "Apr 19, 2026",
+  dataSource: "BAE Systems plc FY 2025 Annual Results (Feb 2026)",
+
+  // Group-level financials
+  totalRevenue:   30.7,   // £Bn
+  totalBacklog:   83.6,   // £Bn — record high
+  totalHeadcount: 109700,
+  openRoles:      2000,   // approx LinkedIn open roles
+  revGrowth:      10,     // % YoY
+  ebitGrowth:     12,     // % underlying EBIT growth
+  freeCashFlow:   2158,   // £M
+
+  // Sites
+  sitesAmericas: 111,
+  sitesUK:       64,
+  sitesEMEA:     4,
+  sitesAPAC:     23,
+
+  // BAE Systems Inc. vs plc split
+  baeIncCyberPct: 66,  // % Cyber I&S in BAE Inc.
+  baePlcCyberPct: 28,  // % Cyber AI in BAE plc.
+
+  // Divisions: salesPct × totalRevenue = revenue
+  // defensePct = % of divisional revenue from defence contracts
+  divisions: {
+    electronic: {
+      name: "Electronic Systems",
+      salesPct:   22,
+      employeePct:18,
+      defensePct: 87,
+      color: "#0e7490",
+      lightBg: "#e0f2fe",
+      sub: [
+        { label:"Electronic Combat",           pct:30, color:"#0e7490" },
+        { label:"C4ISR Systems",               pct:23, color:"#0891b2" },
+        { label:"Precision Strike & Sensing",  pct:17, color:"#22d3ee" },
+        { label:"Countermeasure & EMA",        pct:14, color:"#67e8f9" },
+        { label:"Controls & Avionics",         pct:13, color:"#a5f3fc" },
+        { label:"Power & Propulsion",          pct: 3, color:"#cffafe" }
+      ]
+    },
+    platforms: {
+      name: "Platforms & Services",
+      salesPct:   16,
+      employeePct:13,
+      defensePct: 55,
+      color: "#4b5563",
+      lightBg: "#f3f4f6",
+      sub: [
+        { label:"Combat Mission Systems", pct:52, color:"#374151" },
+        { label:"US Ship Repair",         pct:17, color:"#4b5563" },
+        { label:"Ordnance Systems",       pct:16, color:"#6b7280" },
+        { label:"BAE Systems Hägglunds",  pct: 7, color:"#9ca3af" },
+        { label:"BAE Systems Bofors",     pct: 4, color:"#d1d5db" },
+        { label:"Weapon Systems UK",      pct: 2, color:"#e5e7eb" },
+        { label:"FNSS",                   pct: 2, color:"#f3f4f6" }
+      ]
+    },
+    cyber: {
+      name: "Cyber & Intelligence",
+      salesPct:    9,
+      employeePct:12,
+      defensePct: 94,
+      color: "#b45309",
+      lightBg: "#fef3c7",
+      sub: [
+        { label:"Digital Intelligence",        pct:33, color:"#92400e" },
+        { label:"Intelligence Solutions",      pct:30, color:"#b45309" },
+        { label:"Integrated Defense Solutions",pct:21, color:"#d97706" },
+        { label:"Air Force Solutions",         pct:16, color:"#fbbf24" }
+      ]
+    },
+    air: {
+      name: "Air",
+      salesPct:   33,
+      employeePct:26,
+      defensePct: 57,
+      color: "#1d4ed8",
+      lightBg: "#dbeafe",
+      sub: [
+        { label:"European & International", pct:34, color:"#1e3a8a" },
+        { label:"Kingdom of Saudi Arabia",  pct:33, color:"#1d4ed8" },
+        { label:"MBDA",                     pct:17, color:"#3b82f6" },
+        { label:"US Programmes",            pct:14, color:"#60a5fa" },
+        { label:"FCAS",                     pct: 2, color:"#bfdbfe" }
+      ]
+    },
+    maritime: {
+      name: "Maritime",
+      salesPct:   20,
+      employeePct:26,
+      defensePct: 68,
+      color: "#0f766e",
+      lightBg: "#ccfbf1",
+      sub: [
+        { label:"Submarines",  pct:41, color:"#134e4a" },
+        { label:"Naval Ships", pct:33, color:"#0f766e" },
+        { label:"Australia",   pct:19, color:"#14b8a6" },
+        { label:"Land UK",     pct: 7, color:"#99f6e4" }
+      ]
+    }
+  }
+};
+
+// Compute derived values
+Object.values(BAE_DATA.divisions).forEach(d => {
+  d.revenue = +(BAE_DATA.totalRevenue * d.salesPct / 100).toFixed(2);
+  d.headcount = Math.round(BAE_DATA.totalHeadcount * d.employeePct / 100);
+});
+</script>
+
+<!-- TOPBAR -->
+<div class="topbar">
+  <div class="logo-pill">✈ BEAKON</div>
+  <div class="topbar-title">BAE Systems — Sales Intelligence Dashboard</div>
+  <div style="display:flex;gap:10px;align-items:center;">
+    <div class="pill" id="tb-backlog">£83.6B Backlog</div>
+    <div class="pill" id="tb-hc">109,700 Employees</div>
+    <div class="pill">LSE: BA.</div>
+    <div class="pill-status">● Live</div>
+  </div>
+</div>
+
+<!-- REFRESH BANNER -->
+<div class="refresh-banner">
+  <span id="refresh-line">📡 BAE Systems — FY 2025: Revenue £30.7B (+10% YoY) · Backlog £83.6B (record) · GCAP Edgewing £686M contract Apr 2026 · Norway Type 26 £10B deal · 2,000+ open roles</span>
+  <span style="font-size:11px;opacity:.8;" id="refresh-date">Refreshed: Apr 19, 2026 · Next: Apr 24, 2026</span>
+</div>
+
+<div class="container">
+<!-- SIDEBAR -->
+<div class="sidebar">
+  <div class="sidebar-section">
+    <div class="sidebar-label">BAE Systems</div>
+    <div class="sidebar-meta">Nashua NH · York PA · Govan UK · Warton UK<br>Air · Electronic Systems · Maritime · Platforms · Cyber</div>
+  </div>
+  <div class="sidebar-section">
+    <div class="sidebar-label">Sales</div>
+    <div class="sidebar-item active" onclick="switchSection(event,'overview')">📊 Division Overview</div>
+    <div class="sidebar-item" onclick="switchSection(event,'contacts')">👥 Key Contacts</div>
+    <div class="sidebar-item" onclick="switchSection(event,'actions')">🎯 Sales Actions</div>
+    <div class="sidebar-item" onclick="switchSection(event,'skills')">⚡ Fast-Sell Skills</div>
+  </div>
+  <div class="sidebar-section">
+    <div class="sidebar-label">Intelligence</div>
+    <div class="sidebar-item" onclick="switchSection(event,'signals')">📡 Signal Chains</div>
+    <div class="sidebar-item" onclick="switchSection(event,'hiring')">💼 Hiring Intelligence</div>
+    <div class="sidebar-item" onclick="switchSection(event,'india')">🇮🇳 India Strategy</div>
+    <div class="sidebar-item" onclick="switchSection(event,'competitive')">⚔️ Competitive Intel</div>
+  </div>
+  <div class="sidebar-section">
+    <div class="sidebar-label">Programs</div>
+    <div class="sidebar-item" onclick="switchSection(event,'programs')">🔧 Key Programs</div>
+  </div>
+  <div class="sidebar-section">
+    <div class="sidebar-label">Reference</div>
+    <div class="sidebar-item" onclick="switchSection(event,'reference')">📋 Cyient Proof Points</div>
+  </div>
+</div>
+
+<!-- MAIN CONTENT -->
+<div class="main-content">
+
+<!-- ══════ OVERVIEW ══════ -->
+<div id="overview" class="section active">
+  <div class="section-title">BAE Systems — Divisional Overview</div>
+
+  <!-- KPIs -->
+  <div class="grid-4" style="margin-bottom:20px;">
+    <div class="card">
+      <div class="card-title">FY 2025 Revenue</div>
+      <div class="kpi" id="kpi-rev">£30.7B</div>
+      <div class="kpi-label">+10% YoY organic</div>
+      <div class="kpi-change">▲ 3rd consecutive double-digit growth year</div>
+    </div>
+    <div class="card">
+      <div class="card-title">Order Backlog</div>
+      <div class="kpi" id="kpi-backlog">£83.6B</div>
+      <div class="kpi-label">Record high · +£5.8B YoY</div>
+      <div class="kpi-change">▲ £36.8B order intake in 2025</div>
+    </div>
+    <div class="card">
+      <div class="card-title">Global Headcount</div>
+      <div class="kpi" id="kpi-hc">109,700</div>
+      <div class="kpi-label">Across 5 divisions globally</div>
+      <div class="kpi-change">▲ Growing — 2,000+ open roles</div>
+    </div>
+    <div class="card">
+      <div class="card-title">Free Cash Flow</div>
+      <div class="kpi" id="kpi-fcf">£2,158M</div>
+      <div class="kpi-label">Strong conversion · 2026 guidance: >£1.3B</div>
+      <div class="kpi-change">▲ EBIT +12% YoY</div>
+    </div>
+  </div>
+
+  <!-- ── DIVISION CARDS (matches slide structure) ── -->
+  <div class="divisions-overview" id="divisions-grid">
+    <!-- Rendered by JS below -->
+  </div>
+
+  <!-- ── ENTITIES + SITES BAR ── -->
+  <div class="entities-bar" id="entities-bar">
+    <div class="entity-box">
+      <div class="entity-name">BAE Systems Inc.</div>
+      <div class="entity-sub" id="bae-inc-sub">Includes Cyber I&amp;S (66%)</div>
+      <div style="font-size:11px;color:#555;margin-top:6px;">US-headquartered operations · Platforms &amp; Services, Electronic Systems, Cyber I&amp;S</div>
+    </div>
+    <div class="sites-box" id="sites-box">
+      <div style="font-size:13px;font-weight:800;margin-bottom:6px;">GLOBAL FOOTPRINT</div>
+      <div id="sites-americas">🌎 111 SITES — AMERICAS</div>
+      <div id="sites-uk">🇬🇧 64 SITES — UK</div>
+      <div id="sites-emea">🌍 4 SITES — EMEA</div>
+      <div id="sites-apac">🌏 23 SITES — APAC</div>
+    </div>
+    <div class="entity-box">
+      <div class="entity-name">BAE Systems plc.</div>
+      <div class="entity-sub" id="bae-plc-sub">Includes Cyber AI (28%)</div>
+      <div style="font-size:11px;color:#555;margin-top:6px;">UK-listed parent · Air, Maritime, Cyber &amp; Intelligence (UK AI portion)</div>
+    </div>
+  </div>
+
+  <!-- Strategic context -->
+  <div style="background:linear-gradient(135deg,#4a148c,#6b21a8);border-radius:12px;padding:16px 20px;color:#fff;">
+    <div style="font-size:13px;font-weight:700;margin-bottom:6px;">⚡ Why BAE Systems Now — Three Simultaneous Growth Levers</div>
+    <div style="font-size:12px;line-height:1.7;opacity:.93;">
+      <strong>1. GCAP / Tempest</strong> — Edgewing JV (BAE 33.3%, Leonardo 33.3%, JAIEC 33.3%) awarded £686M first development contract Apr 2026. 6th-gen fighter for UK/Italy/Japan by 2035 — decade-long engineering ramp starting now.<br/>
+      <strong>2. Eurofighter Typhoon</strong> — Pipeline "filled until first GCAP assembly." ECRS Mk2 radar £454M (2026). Turkey €4B order (20 aircraft). Production target 30 jets/year from current 14.<br/>
+      <strong>3. Land Systems / US Manufacturing</strong> — T408, M777, Bradley, CV90 all in active ramp at Nashua NH (CHIPS-funded MMIC expansion) and York PA. Over $35B in contracts secured in 2025 alone.
+    </div>
+  </div>
+</div>
+
+<!-- ══════ SIGNAL CHAINS ══════ -->
+<div id="signals" class="section">
+  <div class="section-title">📡 Signal Chains — Active Hiring Triggers</div>
+  <div style="font-size:13px;color:#666;margin-bottom:22px;">Program events driving BAE Systems engineering talent demand right now. Each chain = a sourcing window for Cyient.</div>
+
+  <!-- Chain 1 -->
+  <div style="background:white;border-radius:12px;padding:18px;margin-bottom:16px;border-left:5px solid #1d4ed8;box-shadow:0 1px 4px rgba(0,0,0,0.08);">
+    <div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:10px;">
+      <div style="font-size:14px;font-weight:700;color:#1d4ed8;">✈️ GCAP / Edgewing — 6th-Gen Fighter Engineering Ramp</div>
+      <span style="background:#fdecea;color:#c62828;font-size:10px;font-weight:700;padding:3px 9px;border-radius:10px;">🔥 HOT — £686M contract Apr 2026</span>
+    </div>
+    <div style="font-size:12px;color:#555;margin-bottom:8px;">📍 <span class="loc-uk">Warton, Lancashire UK</span> · Edgewing JV (BAE 33.3% + Leonardo + JAIEC) · Combat Air Flying Demonstrator unveiled Jul 2025</div>
+    <div style="font-size:12px;line-height:1.7;color:#444;margin-bottom:8px;">The Global Combat Air Programme (GCAP) is the UK-Italy-Japan 6th-generation fighter. Edgewing JV was formed June 2025 and immediately awarded a £686M joint international development contract in April 2026. The flying demonstrator design was unveiled at RIAT July 2025. BAE leads design and systems integration from Warton. This program will ramp engineering teams significantly through the 2020s toward a 2035 in-service target — with initial NPI engineering headcount builds happening now.</div>
+    <div style="font-size:11px;color:#555;"><strong>Cyient angle:</strong> MBSE/SysML for systems architecture, CAD/CAM (CATIA) structural design, avionics integration support, digital engineering (PLM/Teamcenter), simulation & modelling</div>
+    <div style="margin-top:8px;font-size:11px;color:#6b21a8;">📌 Target: BAE Air Division TA at Warton · Search "BAE Systems GCAP engineer Warton"</div>
+  </div>
+
+  <!-- Chain 2 -->
+  <div style="background:white;border-radius:12px;padding:18px;margin-bottom:16px;border-left:5px solid #0e7490;box-shadow:0 1px 4px rgba(0,0,0,0.08);">
+    <div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:10px;">
+      <div style="font-size:14px;font-weight:700;color:#0e7490;">💻 Nashua NH — F-35 EW + CHIPS-Funded MMIC Expansion</div>
+      <span style="background:#fdecea;color:#c62828;font-size:10px;font-weight:700;padding:3px 9px;border-radius:10px;">🔥 HOT</span>
+    </div>
+    <div style="font-size:12px;color:#555;margin-bottom:8px;">📍 <span class="loc-us">Nashua NH</span> · Electronic Systems HQ · CHIPS Act $35.5M funding · F-35 EW + MMIC production</div>
+    <div style="font-size:12px;line-height:1.7;color:#444;margin-bottom:8px;">BAE Nashua is the Electronic Systems HQ — producing F-35 electronic warfare suites, vehicle management computers, and MMIC chips (Microelectronics Center). The $35.5M CHIPS Act funding targets quadrupling MMIC chip production for F-35 and critical defense satellites. Nashua is the most aggressively hiring BAE US site, with engineering, manufacturing, and embedded SW roles consistently open.</div>
+    <div style="font-size:11px;color:#555;"><strong>Cyient angle:</strong> Embedded SW (C/C++, VHDL), DO-178C certification, EW systems integration, FPGA design (DO-254), RF/microwave engineering, electronics manufacturing</div>
+    <div style="margin-top:8px;font-size:11px;color:#6b21a8;">📌 Target: BAE Electronic Systems TA — Nashua NH · Search "BAE Systems Nashua engineer"</div>
+  </div>
+
+  <!-- Chain 3 -->
+  <div style="background:white;border-radius:12px;padding:18px;margin-bottom:16px;border-left:5px solid #0f766e;box-shadow:0 1px 4px rgba(0,0,0,0.08);">
+    <div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:10px;">
+      <div style="font-size:14px;font-weight:700;color:#0f766e;">🚢 Type 26 Frigate Production Ramp — Govan, Scotland</div>
+      <span style="background:#fdecea;color:#c62828;font-size:10px;font-weight:700;padding:3px 9px;border-radius:10px;">🔥 HOT — Norway £10B deal + HMS Glasgow 2026</span>
+    </div>
+    <div style="font-size:12px;color:#555;margin-bottom:8px;">📍 <span class="loc-uk">Govan, Glasgow UK</span> · Janet Harvey Hall · 5 ships under construction · Norway £10B deal Aug 2025</div>
+    <div style="font-size:12px;line-height:1.7;color:#444;margin-bottom:8px;">BAE Govan is constructing 5 Type 26 Anti-Submarine Warfare frigates simultaneously. HMS Glasgow (first ship) begins sea trials in 2026 after commissioning. Production timeline accelerated from 96 to 60 months. Norway confirmed August 2025 — at least 5 additional Type 26 frigates in a £10B deal. The Janet Harvey Hall facility enables simultaneous assembly of two 150m frigates. This is a multi-decade production program with sustained engineering demand through the 2030s.</div>
+    <div style="font-size:11px;color:#555;"><strong>Cyient angle:</strong> Ship structural design, outfitting engineering, systems integration, technical publications (S1000D naval), QA/classification society support</div>
+    <div style="margin-top:8px;font-size:11px;color:#6b21a8;">📌 Target: BAE Maritime Engineering TA — Govan · Search "BAE Systems Type 26 engineer Glasgow"</div>
+  </div>
+
+  <!-- Chain 4 -->
+  <div style="background:white;border-radius:12px;padding:18px;margin-bottom:16px;border-left:5px solid #6b21a8;box-shadow:0 1px 4px rgba(0,0,0,0.08);">
+    <div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:10px;">
+      <div style="font-size:14px;font-weight:700;color:#6b21a8;">🏭 York PA — Land Systems Production Ramp (M777 · Bradley · CV90)</div>
+      <span style="background:#fdecea;color:#c62828;font-size:10px;font-weight:700;padding:3px 9px;border-radius:10px;">🔥 MULTI-PROGRAM RAMP</span>
+    </div>
+    <div style="font-size:12px;color:#555;margin-bottom:8px;">📍 <span class="loc-us">York PA</span> · $162M M777 (Apr 2025) · $146M M776 (Apr 2026) · CV90 Denmark $450M · Bradley A4 $390M+</div>
+    <div style="font-size:12px;line-height:1.7;color:#444;margin-bottom:8px;">York PA is BAE's US land systems hub, running multiple simultaneous production ramps: M777 howitzer structures ($162M, Apr 2025), M776 cannon tubes ($146M, Apr 2026, cumulative $463M), CV90 IFV for Denmark ($450M, 44 vehicles), and Bradley A4 IFV. Combined these represent over $1.1B in active contracts at a single site. Manufacturing engineering, quality, and production planning roles are consistently open.</div>
+    <div style="font-size:11px;color:#555;"><strong>Non-clearance pocket:</strong> Manufacturing engineering, supply chain, quality (AS9100), DFM/DFA, tech pubs (ASD-STE100). Most York roles do not require clearance.</div>
+    <div style="margin-top:8px;font-size:11px;color:#6b21a8;">📌 Target: BAE Platforms & Services TA — York PA · Search "BAE Systems York Pennsylvania engineer"</div>
+  </div>
+
+  <!-- Chain 5 -->
+  <div style="background:white;border-radius:12px;padding:18px;margin-bottom:16px;border-left:5px solid #1d4ed8;box-shadow:0 1px 4px rgba(0,0,0,0.08);">
+    <div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:10px;">
+      <div style="font-size:14px;font-weight:700;color:#1d4ed8;">🛩️ Eurofighter Typhoon Upgrades — ECRS Mk2 + AMK</div>
+      <span style="background:#dbeafe;color:#1d4ed8;font-size:10px;font-weight:700;padding:3px 9px;border-radius:10px;">STRONG PIPELINE</span>
+    </div>
+    <div style="font-size:12px;color:#555;margin-bottom:8px;">📍 <span class="loc-uk">Warton + Samlesbury, UK</span> · ECRS Mk2 £454M (2026) · Turkey €4B · Production target 30/year</div>
+    <div style="font-size:12px;line-height:1.7;color:#444;margin-bottom:8px;">BAE's Eurofighter pipeline is "filled until the first GCAP assembly." The ECRS Mk2 radar contract (£454M, 38 electronically scanning radars for UK Tranche 3 Typhoons) was awarded 2026. Aerodynamic Mod Kit (AMK) upgrades cover leading edge extensions, enlarged flaperons, and FCS/avionics modernization. Turkey's €4B order (20 aircraft, deliveries from 2030) adds to a Spain/Italy/Germany/Saudi pipeline. Production ramp from 14 to 20/year by mid-2028, then 30/year.</div>
+    <div style="font-size:11px;color:#555;"><strong>Cyient angle:</strong> Avionics integration (DO-178C), ECRS Mk2 SW V&V, FCS software, technical publications upgrades (ATA/S1000D), AMK design analysis</div>
+    <div style="margin-top:8px;font-size:11px;color:#6b21a8;">📌 Target: BAE Air Division Engineering TA — Warton/Samlesbury · Search "BAE Systems Typhoon engineer"</div>
+  </div>
+
+  <!-- Chain 6 -->
+  <div style="background:white;border-radius:12px;padding:18px;margin-bottom:16px;border-left:5px solid #b45309;box-shadow:0 1px 4px rgba(0,0,0,0.08);">
+    <div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:10px;">
+      <div style="font-size:14px;font-weight:700;color:#b45309;">🔐 Cyber & Intelligence — Digital Intelligence + GEOINT</div>
+      <span style="background:#fef3c7;color:#b45309;font-size:10px;font-weight:700;padding:3px 9px;border-radius:10px;">GROWING FAST</span>
+    </div>
+    <div style="font-size:12px;color:#555;margin-bottom:8px;">📍 Guildford + Gloucester UK · McLean VA · Burlington MA · 94% defence revenue</div>
+    <div style="font-size:12px;line-height:1.7;color:#444;margin-bottom:8px;">BAE Cyber & Intelligence (£2.76B, 94% defence) operates across Digital Intelligence (33%), Intelligence Solutions (30%), Integrated Defense Solutions (21%), and Air Force Solutions (16%). The division supports NATO intelligence systems, GEOINT, autonomous tracking (DARPA $16M Phase 2), and Space Force missile warning ($1.2B contract). Software engineering, data science, and cyber roles are consistently among BAE's fastest-filling positions globally.</div>
+    <div style="font-size:11px;color:#555;"><strong>Non-clearance pocket:</strong> Data engineering, cloud architecture, software testing, DevSecOps tooling, digital transformation — focus on Digital Intelligence sub-business which has the broadest non-cleared hiring.</div>
+    <div style="margin-top:8px;font-size:11px;color:#6b21a8;">📌 Target: BAE Cyber I&S TA — US (McLean VA / Burlington MA) · Search "BAE Systems cyber intelligence engineer"</div>
+  </div>
+
+  <!-- Chain 7 -->
+  <div style="background:white;border-radius:12px;padding:18px;margin-bottom:6px;border-left:5px solid #0f766e;box-shadow:0 1px 4px rgba(0,0,0,0.08);">
+    <div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:10px;">
+      <div style="font-size:14px;font-weight:700;color:#0f766e;">🇮🇳 BAeHAL Bangalore — India Engineering CoE</div>
+      <span style="background:#fef3c7;color:#b45309;font-size:10px;font-weight:700;padding:3px 9px;border-radius:10px;">STRATEGIC ENTRY POINT</span>
+    </div>
+    <div style="font-size:12px;color:#555;margin-bottom:8px;">📍 <span class="loc-india">Bangalore, India</span> · BAeHAL Software Ltd (50/50 JV: BAE + HAL) · Est. 1993 · ~$31M revenue</div>
+    <div style="font-size:12px;line-height:1.7;color:#444;margin-bottom:8px;">BAeHAL (Bangalore) provides real-time embedded systems, simulation, IT services, technical publications, and ERP for clients including Airbus, Rolls-Royce, HAL, ISRO, and BEL. The JV demonstrates BAE's 30-year commitment to India engineering partnerships. <strong>No BAE engineering center exists in Hyderabad — this is a gap Cyient can fill.</strong> BAE's India strategy explicitly targets "in-country capabilities" and local defense manufacturing partnerships.</div>
+    <div style="font-size:11px;color:#555;"><strong>Cyient angle:</strong> Pitch Hyderabad as BAE's second India engineering hub — leverage Cyient's A&D pedigree, DO-178C practice, and proximity to HAL/DRDO/ISRO for a BAeHAL-style partnership in Hyderabad</div>
+    <div style="margin-top:8px;font-size:11px;color:#6b21a8;">📌 Target: BAE Systems India Leadership + BAeHAL Managing Director · Hyderabad gap = strategic pitch</div>
+  </div>
+</div>
+
+<!-- ══════ SALES ACTIONS ══════ -->
+<div id="actions" class="section">
+  <div class="section-title">🎯 Targeted Sales Actions — BAE Systems</div>
+
+  <div style="background:linear-gradient(135deg,#4a148c,#6b21a8);border-radius:12px;padding:16px 20px;margin-bottom:22px;color:#fff;">
+    <div style="font-size:13px;font-weight:700;margin-bottom:6px;">⚡ Account Context — £83.6B Backlog, 5 Active Ramps</div>
+    <div style="font-size:12px;line-height:1.7;opacity:.93;">BAE's record £83.6B backlog across 5 divisions means every engineering site is simultaneously ramping. GCAP (Air), Type 26 Norway deal (Maritime), CHIPS-funded MMIC expansion (Electronic Systems), land systems multi-program (Platforms & Services), and DARPA/Space Force (Cyber) all create distinct entry points. India's BAeHAL gap in Hyderabad is the highest-leverage strategic angle.</div>
+  </div>
+
+  <!-- AIR -->
+  <div style="border-radius:12px;overflow:hidden;margin-bottom:20px;border:1.5px solid #bfdbfe;">
+    <div style="background:linear-gradient(135deg,#1e3a8a,#1d4ed8);padding:14px 18px;color:#fff;">
+      <div style="font-size:14px;font-weight:700;">✈️ Air Division — GCAP · Typhoon · F-35</div>
+      <div style="font-size:11px;opacity:.85;margin-top:3px;">Warton + Samlesbury UK · 33% of group sales · £10.1B revenue · 57% defence</div>
+    </div>
+    <div style="padding:16px 18px;background:#fff;display:flex;flex-direction:column;gap:10px;">
+      <div style="display:flex;gap:11px;background:#dbeafe;border-radius:8px;padding:11px 14px;border-left:4px solid #1e3a8a;">
+        <div style="background:#1e3a8a;color:#fff;border-radius:50%;width:24px;height:24px;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700;flex-shrink:0;">1</div>
+        <div style="font-size:12px;line-height:1.6;"><strong>🔴 GCAP NPI Engineering Augmentation — Warton UK (HOT)</strong><br/>Edgewing JV just awarded £686M development contract (Apr 2026). 6th-gen fighter NPI is beginning now — systems architecture, airframe design, avionics integration, and digital engineering teams are being assembled. This is the ground floor of a 10-year program. Position Cyient as MBSE/digital engineering support early before frameworks are locked in.<br/><span style="color:#0055a5;">📌 Target: BAE Air Division Engineering TA — Warton · "GCAP systems engineer"</span><br/><span style="color:#b71c1c;font-size:11px;">⚡ Fast-sell: MBSE/SysML · CATIA V5/V6 structural design · Avionics integration · Digital Engineering (PLM) · Simulation & modelling</span></div>
+      </div>
+      <div style="display:flex;gap:11px;background:#dbeafe;border-radius:8px;padding:11px 14px;border-left:4px solid #1e3a8a;">
+        <div style="background:#1e3a8a;color:#fff;border-radius:50%;width:24px;height:24px;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700;flex-shrink:0;">2</div>
+        <div style="font-size:12px;line-height:1.6;"><strong>🔴 Typhoon ECRS Mk2 SW V&V — Warton/Samlesbury (HOT)</strong><br/>£454M ECRS Mk2 radar contract (2026) for UK Tranche 3 Typhoons. Active electronically scanned array (AESA) radar requires avionics SW engineering, DO-178C DAL A/B verification, and systems integration. BAE's production ramp to 30 Typhoons/year will drive sustained avionics engineering demand through 2030. Turkey €4B (20 aircraft, 2030 deliveries) adds to the production queue.<br/><span style="color:#0055a5;">📌 Target: BAE Typhoon Systems TA — Warton · "Typhoon avionics engineer"</span><br/><span style="color:#b71c1c;font-size:11px;">⚡ Fast-sell: DO-178C DAL A/B · AESA radar integration · FCS SW · Avionics V&V · RTCA DO-254</span></div>
+      </div>
+      <div style="display:flex;gap:11px;background:#f0f4ff;border-radius:8px;padding:11px 14px;border-left:4px solid #3b82f6;">
+        <div style="background:#3b82f6;color:#fff;border-radius:50%;width:24px;height:24px;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700;flex-shrink:0;">3</div>
+        <div style="font-size:12px;line-height:1.6;"><strong>🟡 F-35 Aft Fuselage Tech Pubs & Sustainment Engineering</strong><br/>BAE builds 15% of every F-35 (aft fuselage, horizontal/vertical tails) at Samlesbury and Brough. The F-35 sustainment program generates decades of tech pubs, CMM revisions, repair development, and ILS work. APKWS laser-guidance kits ($1.7B, 11,000 units) add a munitions engineering workstream. Steady, recurring pipeline with no program end-date.<br/><span style="color:#0055a5;">📌 Target: BAE F-35 Sustainment TA — Samlesbury/Brough · "BAE Systems F-35 technical publications"</span><br/><span style="color:#c62828;font-size:11px;">⚡ Fast-sell: Technical publications (S1000D) · ILS/IPS · Repair development · Configuration management</span></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ELECTRONIC SYSTEMS -->
+  <div style="border-radius:12px;overflow:hidden;margin-bottom:20px;border:1.5px solid #a5f3fc;">
+    <div style="background:linear-gradient(135deg,#0c4a6e,#0e7490);padding:14px 18px;color:#fff;">
+      <div style="font-size:14px;font-weight:700;">💻 Electronic Systems — F-35 EW · MMIC · C4ISR</div>
+      <div style="font-size:11px;opacity:.85;margin-top:3px;">Nashua NH · Endicott NY · Fort Wayne IN · 22% of sales · £6.75B revenue · 87% defence</div>
+    </div>
+    <div style="padding:16px 18px;background:#fff;display:flex;flex-direction:column;gap:10px;">
+      <div style="display:flex;gap:11px;background:#e0f2fe;border-radius:8px;padding:11px 14px;border-left:4px solid #0c4a6e;">
+        <div style="background:#0c4a6e;color:#fff;border-radius:50%;width:24px;height:24px;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700;flex-shrink:0;">1</div>
+        <div style="font-size:12px;line-height:1.6;"><strong>🔴 CHIPS-Funded MMIC Expansion — Nashua NH (HOT)</strong><br/>$35.5M CHIPS Act funding to quadruple MMIC chip production at BAE's Nashua Microelectronics Center (NIST Trusted Foundry designation). MMIC chips power F-35 EW suites and defense satellites. Engineering scale-up covers semiconductor design, EW systems integration, embedded SW, and manufacturing process engineering. This is BAE's most aggressively hiring US site in 2026.<br/><span style="color:#0055a5;">📌 Target: BAE Electronic Systems TA — Nashua NH</span><br/><span style="color:#b71c1c;font-size:11px;">⚡ Fast-sell: Embedded SW (C/C++/VHDL) · DO-178C · FPGA (DO-254) · RF/microwave engineering · EW systems integration</span></div>
+      </div>
+      <div style="display:flex;gap:11px;background:#f0faff;border-radius:8px;padding:11px 14px;border-left:4px solid #0891b2;">
+        <div style="background:#0891b2;color:#fff;border-radius:50%;width:24px;height:24px;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700;flex-shrink:0;">2</div>
+        <div style="font-size:12px;line-height:1.6;"><strong>🟡 C4ISR Systems Engineering — Fort Wayne IN / Nashua NH</strong><br/>BAE Electronic Systems' C4ISR business (23% of division) covers command, control, comms, computers, intelligence, surveillance, and reconnaissance. Fort Wayne IN supports BAE's electronic systems operations. Non-clearance systems engineering, integration test, and software development roles exist alongside cleared positions.<br/><span style="color:#c62828;font-size:11px;">⚡ Fast-sell: Systems engineering · SW integration · Test engineering · Non-clearance roles only</span></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- MARITIME -->
+  <div style="border-radius:12px;overflow:hidden;margin-bottom:20px;border:1.5px solid #99f6e4;">
+    <div style="background:linear-gradient(135deg,#134e4a,#0f766e);padding:14px 18px;color:#fff;">
+      <div style="font-size:14px;font-weight:700;">🚢 Maritime — Type 26 · Submarines · Australia</div>
+      <div style="font-size:11px;opacity:.85;margin-top:3px;">Govan Glasgow UK · Barrow-in-Furness UK · Adelaide AU · 20% of sales · £6.14B revenue · 68% defence</div>
+    </div>
+    <div style="padding:16px 18px;background:#fff;display:flex;flex-direction:column;gap:10px;">
+      <div style="display:flex;gap:11px;background:#ccfbf1;border-radius:8px;padding:11px 14px;border-left:4px solid #134e4a;">
+        <div style="background:#134e4a;color:#fff;border-radius:50%;width:24px;height:24px;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700;flex-shrink:0;">1</div>
+        <div style="font-size:12px;line-height:1.6;"><strong>🔴 Type 26 Frigate Engineering Ramp — Govan + Norway £10B (HOT)</strong><br/>5 ships under construction. HMS Glasgow sea trials 2026. Norway confirmed 5+ ships in £10B deal (Aug 2025). Production timeline cut from 96 to 60 months. Each additional ship requires outfitting engineering, systems integration, and weapons/comms installation documentation. Multi-decade program — Govan is BAE's highest-headcount maritime site.<br/><span style="color:#0055a5;">📌 Target: BAE Maritime TA — Govan</span><br/><span style="color:#b71c1c;font-size:11px;">⚡ Fast-sell: Ship outfitting engineering · Systems integration · S1000D naval tech pubs · QA/class society · Structural design</span></div>
+      </div>
+      <div style="display:flex;gap:11px;background:#f0fdf4;border-radius:8px;padding:11px 14px;border-left:4px solid #15803d;">
+        <div style="background:#15803d;color:#fff;border-radius:50%;width:24px;height:24px;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700;flex-shrink:0;">2</div>
+        <div style="font-size:12px;line-height:1.6;"><strong>🟢 Australia AUKUS Submarine Program — Adelaide SA (Long Horizon)</strong><br/>Australia (19% of Maritime revenue) is primarily the Hunter Class frigate (Type 26 derivative) and growing AUKUS submarine involvement. BAE has a major presence in Adelaide. AUKUS SSN program creates decade-long engineering demand with shipbuilding, systems engineering, and certification roles. Build the relationship now via BAE Australia for a long-horizon program entry.<br/><span style="color:#c62828;font-size:11px;">⚡ Fast-sell: Long-horizon relationship play · Naval engineering · Systems integration · Tech pubs</span></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- INDIA -->
+  <div style="border-radius:12px;overflow:hidden;margin-bottom:6px;border:1.5px solid #fde68a;">
+    <div style="background:linear-gradient(135deg,#78350f,#b45309);padding:14px 18px;color:#fff;">
+      <div style="font-size:14px;font-weight:700;">🇮🇳 India Strategy — BAeHAL + Hyderabad Gap</div>
+      <div style="font-size:11px;opacity:.85;margin-top:3px;">Bangalore (BAeHAL JV) · No Hyderabad presence · "In India, for India" strategy</div>
+    </div>
+    <div style="padding:16px 18px;background:#fff;display:flex;flex-direction:column;gap:10px;">
+      <div style="display:flex;gap:11px;background:#fef9c3;border-radius:8px;padding:11px 14px;border-left:4px solid #78350f;">
+        <div style="background:#78350f;color:#fff;border-radius:50%;width:24px;height:24px;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700;flex-shrink:0;">1</div>
+        <div style="font-size:12px;line-height:1.6;"><strong>🔴 Pitch: Cyient as BAE's Hyderabad Engineering Hub (STRATEGIC PRIORITY)</strong><br/>BAeHAL (Bangalore, est. 1993) is BAE's only India engineering presence. BAE's India strategy explicitly targets "in-country capabilities" for aerospace, defense, simulation, and tech pubs. <strong>Hyderabad has no BAE presence</strong> despite being India's defense/aerospace engineering capital (DRDO, HAL, DRDL, ISRO, Bharat Dynamics all based here). Cyient's HQ, engineering infrastructure, and existing A&D relationships are in Hyderabad — pitch a BAeHAL-style partnership or preferred delivery partner arrangement for BAE's Hyderabad expansion.<br/><span style="color:#0055a5;">📌 Target: BAE Systems India Country Head + BAeHAL MD — Executive relationship pitch</span><br/><span style="color:#b71c1c;font-size:11px;">⚡ Action: Executive briefing deck positioning Cyient as BAE Hyderabad delivery partner · Leverage BAeHAL precedent</span></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ══════ HIRING ══════ -->
+<div id="hiring" class="section">
+  <div class="section-title">💼 Hiring Intelligence — BAE Systems</div>
+  <div class="grid-2">
+    <div class="card">
+      <div class="card-title">Open Roles by Division (Estimated)</div>
+      <div class="prog-row"><div class="prog-label"><span>Air (Warton/Samlesbury UK)</span><span>~600+</span></div><div class="prog-bar"><div class="prog-fill" style="width:90%;"></div></div></div>
+      <div class="prog-row"><div class="prog-label"><span>Electronic Systems (Nashua NH)</span><span>~450+</span></div><div class="prog-bar"><div class="prog-fill" style="width:72%;"></div></div></div>
+      <div class="prog-row"><div class="prog-label"><span>Platforms & Services (York PA)</span><span>~350+</span></div><div class="prog-bar"><div class="prog-fill" style="width:58%;"></div></div></div>
+      <div class="prog-row"><div class="prog-label"><span>Maritime (Govan / Barrow UK)</span><span>~400+</span></div><div class="prog-bar"><div class="prog-fill" style="width:65%;"></div></div></div>
+      <div class="prog-row"><div class="prog-label"><span>Cyber & Intelligence (US/UK)</span><span>~200+</span></div><div class="prog-bar"><div class="prog-fill" style="width:38%;"></div></div></div>
+      <div style="font-size:10px;color:#999;margin-top:8px;">Total: 2,000+ open roles globally (LinkedIn, Apr 2026)</div>
+    </div>
+    <div class="card">
+      <div class="card-title">Most In-Demand Disciplines</div>
+      <div class="prog-row"><div class="prog-label"><span>Engineering (Mechanical/Aerospace/Systems)</span><span>99+ roles</span></div><div class="prog-bar"><div class="prog-fill" style="width:95%;"></div></div></div>
+      <div class="prog-row"><div class="prog-label"><span>Prog. & Project Management</span><span>99+ roles</span></div><div class="prog-bar"><div class="prog-fill" style="width:90%;"></div></div></div>
+      <div class="prog-row"><div class="prog-label"><span>Cybersecurity / SW Engineering</span><span>56+ roles</span></div><div class="prog-bar"><div class="prog-fill" style="width:70%;"></div></div></div>
+      <div class="prog-row"><div class="prog-label"><span>Operations & Manufacturing Support</span><span>55+ roles</span></div><div class="prog-bar"><div class="prog-fill" style="width:68%;"></div></div></div>
+      <div class="prog-row"><div class="prog-label"><span>Data & Analytics</span><span>49+ roles</span></div><div class="prog-bar"><div class="prog-fill" style="width:58%;"></div></div></div>
+    </div>
+  </div>
+</div>
+
+<!-- ══════ INDIA STRATEGY ══════ -->
+<div id="india" class="section">
+  <div class="section-title">🇮🇳 India Strategy — BAeHAL & Hyderabad Opportunity</div>
+  <div class="grid-2">
+    <div class="card">
+      <div class="card-title">BAeHAL Software Ltd — Existing JV</div>
+      <table style="width:100%;font-size:12px;border-collapse:collapse;">
+        <tr style="border-bottom:1px solid #eee;"><td style="padding:7px 0;color:#666;">JV Partners</td><td style="padding:7px 0;font-weight:600;">BAE Systems (50%) + Hindustan Aeronautics Ltd (50%)</td></tr>
+        <tr style="border-bottom:1px solid #eee;"><td style="padding:7px 0;color:#666;">Established</td><td style="padding:7px 0;font-weight:600;">1993 — 30+ years of India engineering</td></tr>
+        <tr style="border-bottom:1px solid #eee;"><td style="padding:7px 0;color:#666;">Location</td><td style="padding:7px 0;font-weight:600;">Bangalore, India + UK branch office</td></tr>
+        <tr style="border-bottom:1px solid #eee;"><td style="padding:7px 0;color:#666;">Revenue</td><td style="padding:7px 0;font-weight:600;">~$31M annually</td></tr>
+        <tr style="border-bottom:1px solid #eee;"><td style="padding:7px 0;color:#666;">Services</td><td style="padding:7px 0;font-weight:600;">Real-time embedded systems, simulation, IT, ERP, tech pubs</td></tr>
+        <tr><td style="padding:7px 0;color:#666;">Clients</td><td style="padding:7px 0;font-weight:600;">Airbus, Rolls-Royce, British Airways, HAL, ISRO, BEL, DRDO</td></tr>
+      </table>
+    </div>
+    <div class="card">
+      <div class="card-title">Hyderabad Gap — Cyient's Opening</div>
+      <div style="background:#fdecea;padding:12px;border-radius:6px;margin-bottom:12px;border-left:3px solid #c62828;font-size:12px;line-height:1.7;">
+        <strong style="color:#c62828;">❌ BAE has NO Hyderabad engineering presence</strong><br/>
+        Despite Hyderabad being India's defense/aerospace capital: DRDO HQ · DRDL · HAL (Hyderabad Division) · BDL · ISRO NRSC · Bharat Electronics Ltd. BAE is missing from this ecosystem entirely.
+      </div>
+      <div style="background:#e8f5e9;padding:12px;border-radius:6px;border-left:3px solid #1b5e20;font-size:12px;line-height:1.7;">
+        <strong style="color:#1b5e20;">✅ Cyient's Hyderabad Position</strong><br/>
+        Cyient HQ is in Hyderabad. Existing relationships with DRDO, HAL, BDL, ISRO. 30+ year A&D pedigree. Same talent pool BAE would need. Pitch: Cyient as BAE's preferred Hyderabad delivery partner — extension of the BAeHAL model into India's defense capital.
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ══════ COMPETITIVE INTEL ══════ -->
+<div id="competitive" class="section">
+  <div class="section-title">⚔️ Competitive Intelligence</div>
+  <div style="background:linear-gradient(135deg,#7b1fa2,#9c27b0);border-radius:10px;padding:13px 16px;margin-bottom:20px;color:#fff;">
+    <div style="font-size:12px;font-weight:700;margin-bottom:5px;">👁️ COMPETITOR WATCH — Verify Global (verifyglobal.com)</div>
+    <div style="font-size:11px;line-height:1.65;opacity:.93;">Verify Global (HQ: Costa Mesa CA) specializes in Supplier Quality Management — FAI (AS9102), PPAP, AS9145 audits, capability assessments, corrective action management. 400+ customers · 7,000+ supplier locations · 50 countries · 8,000+ field resources. <strong>Overlap at BAE: York PA land systems supply chain quality, Nashua NH electronic components supplier FAI.</strong> No India office — Cyient's India delivery is the key differentiator. Cyient counter: full engineering scope + India delivery + long-term program embedding.</div>
+  </div>
+  <div class="grid-2">
+    <div class="card">
+      <div class="card-title">Key Competitors at BAE Systems</div>
+      <div style="font-size:12px;line-height:1.8;">
+        <div style="padding:8px;background:#fdecea;border-radius:6px;margin-bottom:8px;border-left:3px solid #c62828;"><strong style="color:#c62828;">🔴 HIGH THREAT</strong><br/><strong>LTTS (L&T Technology Services)</strong> — Strong India A&D base, compete at BAE India and Air division. Aggressive pricing.<br/><strong>HCL Engineering</strong> — BAE existing vendor. PLM, digital engineering, embedded systems.</div>
+        <div style="padding:8px;background:#fff3e0;border-radius:6px;margin-bottom:8px;border-left:3px solid #e65100;"><strong style="color:#e65100;">🟡 MEDIUM THREAT</strong><br/><strong>Alten / Altran (Capgemini)</strong> — European engineering staffing, active at Warton/Samlesbury.<br/><strong>QinetiQ</strong> — UK defense engineering consultancy, competes on Air and Maritime advisory work.</div>
+        <div style="padding:8px;background:#e8f5e9;border-radius:6px;border-left:3px solid #1b5e20;"><strong style="color:#1b5e20;">🟢 Cyient Advantage</strong><br/>India delivery (Hyderabad gap), DO-178C certification depth, AS9100/NADCAP credentials, and tech pubs (S1000D) across all BAE divisions.</div>
+      </div>
+    </div>
+    <div class="card">
+      <div class="card-title">Cyient Differentiation at BAE</div>
+      <div style="font-size:12px;line-height:1.8;color:#444;">
+        <div style="margin-bottom:8px;">✅ Only major A&D engineering firm with <strong>Hyderabad HQ</strong> — matching BAE India's gap perfectly</div>
+        <div style="margin-bottom:8px;">✅ DO-178C DAL A/B practice — directly maps to GCAP, Typhoon ECRS Mk2, F-35 EW SW needs</div>
+        <div style="margin-bottom:8px;">✅ S1000D technical publications — all BAE platforms use S1000D (F-35, Type 26, Typhoon)</div>
+        <div style="margin-bottom:8px;">✅ AS9100/NADCAP quality credentials — York PA, Nashua NH supplier quality</div>
+        <div>✅ CATIA V5/V6 + MBSE/SysML — GCAP digital engineering and Typhoon design augmentation</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ══════ PROGRAMS ══════ -->
+<div id="programs" class="section">
+  <div class="section-title">🔧 Key Programs — BAE Systems</div>
+  <div class="grid-2">
+    <div class="card">
+      <div class="card-title">Air & Defense Programs</div>
+      <table style="width:100%;font-size:12px;border-collapse:collapse;">
+        <thead><tr style="background:#f5f5f5;"><th style="padding:8px;text-align:left;border-bottom:2px solid #ddd;">Program</th><th style="padding:8px;">Status</th><th style="padding:8px;">Value</th></tr></thead>
+        <tbody>
+          <tr style="border-bottom:1px solid #eee;"><td style="padding:8px;"><strong>GCAP (Tempest)</strong><br/><span style="font-size:10px;color:#666;">6th-gen fighter UK/Italy/Japan</span></td><td style="padding:8px;"><span style="background:#fdecea;color:#c62828;padding:2px 7px;border-radius:8px;font-size:10px;font-weight:700;">🔥 NPI START</span></td><td style="padding:8px;">£686M (Phase 1)</td></tr>
+          <tr style="border-bottom:1px solid #eee;"><td style="padding:8px;"><strong>F-35 Work Share</strong><br/><span style="font-size:10px;color:#666;">Aft fuselage, EW systems, tails</span></td><td style="padding:8px;"><span style="background:#e8f5e9;color:#1b5e20;padding:2px 7px;border-radius:8px;font-size:10px;font-weight:700;">PRODUCTION</span></td><td style="padding:8px;">15% per aircraft</td></tr>
+          <tr style="border-bottom:1px solid #eee;"><td style="padding:8px;"><strong>Typhoon ECRS Mk2</strong><br/><span style="font-size:10px;color:#666;">AESA radar for UK Tranche 3</span></td><td style="padding:8px;"><span style="background:#fdecea;color:#c62828;padding:2px 7px;border-radius:8px;font-size:10px;font-weight:700;">ACTIVE</span></td><td style="padding:8px;">£454M</td></tr>
+          <tr style="border-bottom:1px solid #eee;"><td style="padding:8px;"><strong>Typhoon Turkey</strong><br/><span style="font-size:10px;color:#666;">20 aircraft + weapons</span></td><td style="padding:8px;"><span style="background:#dbeafe;color:#1d4ed8;padding:2px 7px;border-radius:8px;font-size:10px;font-weight:700;">CONTRACTED</span></td><td style="padding:8px;">€4B</td></tr>
+          <tr><td style="padding:8px;"><strong>APKWS Laser Kits</strong><br/><span style="font-size:10px;color:#666;">11,000 kits for US forces</span></td><td style="padding:8px;"><span style="background:#e8f5e9;color:#1b5e20;padding:2px 7px;border-radius:8px;font-size:10px;font-weight:700;">PRODUCTION</span></td><td style="padding:8px;">$1.7B</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="card">
+      <div class="card-title">Maritime & Land Programs</div>
+      <table style="width:100%;font-size:12px;border-collapse:collapse;">
+        <thead><tr style="background:#f5f5f5;"><th style="padding:8px;text-align:left;border-bottom:2px solid #ddd;">Program</th><th style="padding:8px;">Status</th><th style="padding:8px;">Value</th></tr></thead>
+        <tbody>
+          <tr style="border-bottom:1px solid #eee;"><td style="padding:8px;"><strong>Type 26 Frigate (UK)</strong><br/><span style="font-size:10px;color:#666;">8 ships, HMS Glasgow 2026</span></td><td style="padding:8px;"><span style="background:#fdecea;color:#c62828;padding:2px 7px;border-radius:8px;font-size:10px;font-weight:700;">🔥 RAMP</span></td><td style="padding:8px;">£10B+ programme</td></tr>
+          <tr style="border-bottom:1px solid #eee;"><td style="padding:8px;"><strong>Type 26 Norway</strong><br/><span style="font-size:10px;color:#666;">5+ frigates confirmed Aug 2025</span></td><td style="padding:8px;"><span style="background:#fdecea;color:#c62828;padding:2px 7px;border-radius:8px;font-size:10px;font-weight:700;">NEW</span></td><td style="padding:8px;">£10B</td></tr>
+          <tr style="border-bottom:1px solid #eee;"><td style="padding:8px;"><strong>M777 + M776</strong><br/><span style="font-size:10px;color:#666;">Howitzer structures + cannon tubes</span></td><td style="padding:8px;"><span style="background:#dbeafe;color:#1d4ed8;padding:2px 7px;border-radius:8px;font-size:10px;font-weight:700;">ACTIVE</span></td><td style="padding:8px;">$308M (combined)</td></tr>
+          <tr style="border-bottom:1px solid #eee;"><td style="padding:8px;"><strong>CV90 Denmark</strong><br/><span style="font-size:10px;color:#666;">44 MkIIIC vehicles</span></td><td style="padding:8px;"><span style="background:#dbeafe;color:#1d4ed8;padding:2px 7px;border-radius:8px;font-size:10px;font-weight:700;">ACTIVE</span></td><td style="padding:8px;">$450M</td></tr>
+          <tr><td style="padding:8px;"><strong>Bradley A4 IFV</strong><br/><span style="font-size:10px;color:#666;">US Army upgrade</span></td><td style="padding:8px;"><span style="background:#dbeafe;color:#1d4ed8;padding:2px 7px;border-radius:8px;font-size:10px;font-weight:700;">ACTIVE</span></td><td style="padding:8px;">$390M+</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+
+<!-- ══════ CONTACTS ══════ -->
+<div id="contacts" class="section">
+  <div class="section-title">👥 Key Contacts — BAE Systems</div>
+  <div style="background:#fff3cd;border:1px solid #ffc107;border-radius:8px;padding:12px 16px;margin-bottom:22px;font-size:12px;color:#856404;">⚠️ Verify all contacts on LinkedIn before outreach. BAE TA is organized by division and site. Entry point: target TA Business Partners by site — Nashua NH (Electronic Systems), York PA (Platforms), Warton UK (Air), Govan UK (Maritime).</div>
+  <div class="grid-2">
+    <div>
+      <div style="font-size:13px;font-weight:700;color:#1d4ed8;margin-bottom:10px;">Air Division — Warton/Samlesbury UK</div>
+      <div class="contact-card" style="border-left-color:#1d4ed8;"><div class="contact-name">Air Division TA Business Partner</div><div class="contact-title">GCAP / Typhoon / F-35 Engineering Staffing</div><div class="contact-location">Warton, Lancashire UK · Search "BAE Systems Air TA Warton"</div></div>
+      <div style="font-size:13px;font-weight:700;color:#0e7490;margin-bottom:10px;margin-top:16px;">Electronic Systems — Nashua NH</div>
+      <div class="contact-card" style="border-left-color:#0e7490;"><div class="contact-name">Electronic Systems TA BP — Nashua NH</div><div class="contact-title">F-35 EW / MMIC / C4ISR Engineering Staffing</div><div class="contact-location">Nashua NH · CHIPS-funded expansion · Most active US hiring site</div></div>
+    </div>
+    <div>
+      <div style="font-size:13px;font-weight:700;color:#0f766e;margin-bottom:10px;">Maritime — Govan / Barrow UK</div>
+      <div class="contact-card" style="border-left-color:#0f766e;"><div class="contact-name">Maritime TA Business Partner</div><div class="contact-title">Type 26 / Submarine Engineering Staffing</div><div class="contact-location">Govan, Glasgow · Search "BAE Systems Maritime TA Govan"</div></div>
+      <div style="font-size:13px;font-weight:700;color:#6b21a8;margin-bottom:10px;margin-top:16px;">India — BAeHAL / Hyderabad</div>
+      <div class="contact-card"><div class="contact-name">BAE Systems India Country Head</div><div class="contact-title">India Strategy & Partnerships</div><div class="contact-location">New Delhi / Bangalore · Key contact for Hyderabad expansion pitch</div></div>
+      <div class="contact-card"><div class="contact-name">Dr. Charles Woodburn</div><div class="contact-title">CEO, BAE Systems plc.</div><div class="contact-location">London UK · CEO since July 2017 · Background in defense, aerospace, oil & gas</div></div>
+    </div>
+  </div>
+</div>
+
+<!-- ══════ SKILLS ══════ -->
+<div id="skills" class="section">
+  <div class="section-title">⚡ Fast-Sell Skills for BAE Systems</div>
+  <div class="grid-2">
+    <div class="card">
+      <div class="card-title">Cyient Core Competencies — Direct Match</div>
+      <div style="margin-bottom:14px;"><div style="font-weight:600;font-size:12px;margin-bottom:8px;">✈️ Air Division (Warton/Samlesbury)</div>
+        <span class="tag tag-accent">DO-178C DAL A/B</span><span class="tag tag-accent">CATIA V5/V6</span><span class="tag tag-accent">MBSE/SysML</span><span class="tag tag-accent">FCS Software</span><span class="tag tag-accent">Avionics Integration</span><span class="tag tag-accent">S1000D Tech Pubs</span>
+      </div>
+      <div style="margin-bottom:14px;"><div style="font-weight:600;font-size:12px;margin-bottom:8px;">💻 Electronic Systems (Nashua NH)</div>
+        <span class="tag tag-accent">Embedded SW (C/C++/VHDL)</span><span class="tag tag-accent">FPGA (DO-254)</span><span class="tag tag-accent">RF/Microwave Engineering</span><span class="tag tag-accent">EW Systems Integration</span>
+      </div>
+      <div style="margin-bottom:14px;"><div style="font-weight:600;font-size:12px;margin-bottom:8px;">🚢 Maritime (Govan)</div>
+        <span class="tag tag-accent">S1000D Naval Tech Pubs</span><span class="tag tag-accent">Ship Outfitting Engineering</span><span class="tag tag-accent">QA / Classification Society</span>
+      </div>
+      <div><div style="font-weight:600;font-size:12px;margin-bottom:8px;">🏭 Platforms — York PA</div>
+        <span class="tag tag-accent">Manufacturing Engineering</span><span class="tag tag-accent">AS9100 Quality</span><span class="tag tag-accent">ASD-STE100 Tech Pubs</span><span class="tag tag-accent">DFM/DFA</span>
+      </div>
+    </div>
+    <div class="card">
+      <div class="card-title">Why Cyient Wins at BAE</div>
+      <div style="font-size:12px;line-height:1.9;color:#444;">
+        <div style="padding:10px;background:#e8f5e9;border-radius:6px;margin-bottom:10px;border-left:3px solid #1b5e20;"><strong style="color:#1b5e20;">🇮🇳 Hyderabad Gap</strong><br/>Only major A&D engineering firm with HQ in India's defense capital — BAE has no Hyderabad presence. Pitch: Cyient as BAE's Hyderabad delivery partner (extension of BAeHAL model).</div>
+        <div style="padding:10px;background:#dbeafe;border-radius:6px;margin-bottom:10px;border-left:3px solid #1d4ed8;"><strong style="color:#1d4ed8;">✈️ GCAP Ground Floor</strong><br/>GCAP engineering teams being assembled now. Position early on digital engineering/MBSE before frameworks and vendor lists are locked in.</div>
+        <div style="padding:10px;background:#e0f2fe;border-radius:6px;border-left:3px solid #0e7490;"><strong style="color:#0e7490;">💻 DO-178C at Nashua</strong><br/>MMIC expansion + F-35 EW upgrades require DO-178C/DO-254 certified SW engineers — Cyient's certification practice maps directly to BAE Electronic Systems' hardest-to-fill roles.</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ══════ REFERENCE ══════ -->
+<div id="reference" class="section">
+  <div class="section-title">📋 Cyient Proof Points for BAE Systems</div>
+  <div class="grid-2">
+    <div class="card">
+      <div class="card-title">Engineering Credentials</div>
+      <span class="tag tag-accent">AS9100 Certified</span><span class="tag tag-accent">DO-178C Practice</span><span class="tag tag-accent">DO-254 Practice</span><span class="tag tag-accent">S1000D Tech Pubs</span><span class="tag tag-accent">ASD-STE100</span><span class="tag tag-accent">CATIA V5/V6</span><span class="tag tag-accent">MBSE/SysML</span><span class="tag tag-accent">FEA/Stress Analysis</span><span class="tag tag-accent">ANSYS / Nastran</span><span class="tag tag-accent">VHDL/FPGA Design</span><span class="tag tag-accent">Embedded C/C++</span><span class="tag tag-accent">Classification Society QA</span>
+    </div>
+    <div class="card">
+      <div class="card-title">Data Refresh Schedule</div>
+      <div style="font-size:12px;line-height:1.9;color:#444;">
+        <div style="margin-bottom:8px;"><strong>🔄 5-Day Auto-Refresh (data_refresh_bae.py):</strong></div>
+        <div>• Division revenue figures (£Bn calculated from total × salesPct)</div>
+        <div>• Total backlog and revenue from BAE IR feed</div>
+        <div>• Open roles count (LinkedIn scrape)</div>
+        <div>• Global sites count</div>
+        <div>• Refresh banner program news</div>
+        <div style="margin-top:8px;"><strong>🔒 Semi-static (manual update quarterly):</strong></div>
+        <div>• Sub-business % splits (from annual report)</div>
+        <div>• Defense revenue % per division</div>
+        <div>• Employee % per division</div>
+        <div style="margin-top:8px;font-size:10px;color:#999;">Last refreshed: <span id="ref-date">Apr 19, 2026</span></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+</div><!-- /main-content -->
+</div><!-- /container -->
+
+<!-- ── CHART RENDERING ── -->
+<script>
+function switchSection(event, id) {
+  document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
+  document.querySelectorAll('.sidebar-item').forEach(i => i.classList.remove('active'));
+  const el = document.getElementById(id);
+  if (el) el.classList.add('active');
+  if (event && event.currentTarget) event.currentTarget.classList.add('active');
+}
+
+// Render dynamic KPIs from BAE_DATA
+document.getElementById('kpi-rev').textContent = '£' + BAE_DATA.totalRevenue + 'B';
+document.getElementById('kpi-backlog').textContent = '£' + BAE_DATA.totalBacklog + 'B';
+document.getElementById('kpi-hc').textContent = BAE_DATA.totalHeadcount.toLocaleString();
+document.getElementById('tb-backlog').textContent = '£' + BAE_DATA.totalBacklog + 'B Backlog';
+document.getElementById('tb-hc').textContent = BAE_DATA.totalHeadcount.toLocaleString() + ' Employees';
+document.getElementById('bae-inc-sub').textContent = 'Includes Cyber I&S (' + BAE_DATA.baeIncCyberPct + '%)';
+document.getElementById('bae-plc-sub').textContent = 'Includes Cyber AI (' + BAE_DATA.baePlcCyberPct + '%)';
+document.getElementById('sites-americas').textContent = '🌎 ' + BAE_DATA.sitesAmericas + ' SITES — AMERICAS';
+document.getElementById('sites-uk').textContent = '🇬🇧 ' + BAE_DATA.sitesUK + ' SITES — UK';
+document.getElementById('sites-emea').textContent = '🌍 ' + BAE_DATA.sitesEMEA + ' SITES — EMEA';
+document.getElementById('sites-apac').textContent = '🌏 ' + BAE_DATA.sitesAPAC + ' SITES — APAC';
+document.getElementById('refresh-date').textContent = 'Refreshed: ' + BAE_DATA.lastRefreshed + ' · Next: Apr 24, 2026';
+if(document.getElementById('ref-date')) document.getElementById('ref-date').textContent = BAE_DATA.lastRefreshed;
+
+// Build division cards
+const grid = document.getElementById('divisions-grid');
+const divOrder = ['electronic','platforms','cyber','air','maritime'];
+const charts = {};
+
+divOrder.forEach(key => {
+  const d = BAE_DATA.divisions[key];
+  const card = document.createElement('div');
+  card.className = 'div-card';
+  card.innerHTML = `
+    <div class="div-header" style="background:${d.color};">${d.name}</div>
+    <div class="div-stats" style="background:${d.lightBg};color:#333;">
+      Sales contribution: <strong>${d.salesPct}%</strong><br>
+      Employees: <strong>${d.employeePct}%</strong>
+    </div>
+    <div class="div-chart-wrap" style="position:relative;">
+      <canvas id="chart-${key}" width="140" height="140"></canvas>
+      <div class="div-center-label" style="top:50%;left:50%;transform:translate(-50%,-50%);">
+        <div class="div-center-rev">£${d.revenue}Bn</div>
+        <div class="div-center-d">${d.defensePct}% (D)</div>
+      </div>
+    </div>
+    <div class="div-legend" id="legend-${key}"></div>`;
+  grid.appendChild(card);
+});
+
+// Render legends
+divOrder.forEach(key => {
+  const d = BAE_DATA.divisions[key];
+  const legend = document.getElementById('legend-' + key);
+  const letters = 'ABCDEFG';
+  d.sub.forEach((s, i) => {
+    const row = document.createElement('div');
+    row.className = 'div-legend-row';
+    row.innerHTML = `<span class="div-legend-label"><span class="div-legend-dot" style="background:${s.color};"></span>${letters[i]}&nbsp;${s.label}</span><span class="div-legend-pct">${s.pct}%</span>`;
+    legend.appendChild(row);
+  });
+});
+
+// Draw charts after DOM settles
+requestAnimationFrame(() => {
+  divOrder.forEach(key => {
+    const d = BAE_DATA.divisions[key];
+    const ctx = document.getElementById('chart-' + key).getContext('2d');
+    new Chart(ctx, {
+      type: 'doughnut',
+      data: {
+        labels: d.sub.map(s => s.label),
+        datasets: [{
+          data: d.sub.map(s => s.pct),
+          backgroundColor: d.sub.map(s => s.color),
+          borderWidth: 1,
+          borderColor: '#fff'
+        }]
+      },
+      options: {
+        responsive: false,
+        cutout: '62%',
+        plugins: { legend: { display: false }, tooltip: { callbacks: { label: ctx => ` ${ctx.label}: ${ctx.parsed}%` } } }
+      }
+    });
+  });
+});
+</script>
+</body>
+</html>
