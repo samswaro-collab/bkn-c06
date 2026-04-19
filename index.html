@@ -194,9 +194,7 @@ const BAE_DATA = {
       { icon:"🚀", label:"Horizon Solutions Aftermarket Expansion (2026 build-out)",
         body:"BAE launched Horizon Solutions aftermarket avionics services at MRO Europe Oct 2025. Build-out phase runs through 2026 — need for aftermarket engineering, certification support, tech pubs.",
         action:"Email hook: 'Saw Horizon Solutions at MRO Europe — aftermarket avionics engineering is exactly where we've supported Thales and Collins. 20 mins to talk cert support for the build-out?'" },
-      { icon:"🇮🇳", label:"BAeHAL Hyderabad Gap — Cyient HQ Advantage",
-        body:"BAE's only India presence is BAeHAL Bangalore (est. 1993). Hyderabad has no BAE footprint despite being India's defense/aerospace capital. Cyient HQ is Hyderabad — HAL, DRDO, Bharat Dynamics all neighbours.",
-        action:"Pitch: 'BAeHAL proves the India engineering model. Hyderabad is the next frontier — DRDO, HAL, BDL all here, and we're already embedded. Let us be your Hyderabad delivery partner.'" },
+      
       { icon:"🛡️", label:"UK ITAR-Compliant ER&D Demand",
         body:"BAE is ITAR-controlled. Supply-chain engineering must meet strict security requirements. Cyient holds ITAR registration and secure delivery capability — rare among Indian ER&D firms.",
         action:"Credential: reference Cyient's ITAR registration and existing defense program experience upfront in every BAE conversation." },
@@ -207,9 +205,9 @@ const BAE_DATA = {
     coldToWarm: [
       { step:1, label:"Cold Signal Monitor", body:"Watch BAE press releases for Horizon Solutions updates, India announcements, new platform wins. Each is an outreach trigger." },
       { step:2, label:"Personalised Email to TA/VP", body:"Reference specific BAE news in one sentence. Cite Cyient's A&D credential. One question. No deck attachment." },
-      { step:3, label:"LinkedIn Engagement", body:"Connect with BAE India Country Head and BAeHAL MD. Comment on posts about India defense manufacturing with relevant insight." },
-      { step:4, label:"Event Pre-Outreach", body:"2 weeks before MRO Americas (Apr 21) or Farnborough (Jul 20): email to schedule 20-min at-show meeting." },
-      { step:5, label:"Warm Meeting", body:"Agenda: Horizon Solutions cert backlog → Cyient DO-178C track record → India Hyderabad hub pitch → action item." }
+      { step:4, label:"Event Presence", body:"Attend MRO Americas, AUSA, DSEI where BAE Systems Inc. engineering leaders are present. Direct conversations with VP Engineering and Director Engineering roles drive faster pipeline movement than cold outreach." },
+            { step:4, label:"Event Pre-Outreach", body:"2 weeks before MRO Americas (Apr 21) or Farnborough (Jul 20): email to schedule 20-min at-show meeting." },
+      { step:5, label:"Warm Meeting", body:"Agenda: Horizon Solutions cert backlog → Cyient DO-178C track record → certification services pitch → action item." }
     ]
   },
   partnerships: [
@@ -236,7 +234,7 @@ const BAE_DATA = {
       angle:"Palantir deployment = data engineering and integration work. Cyient's digital services practice can support data pipeline and API integration for BAE's Palantir rollout." },
     { name:"Quest Global (post Alpha-Numero)", type:"⚠️ COMPETITOR — Monitor Closely", status:"Growing presence at BAE Inc.",
       desc:"Quest Global acquired Alpha-Numero (Canadian A&D ER&D firm) and now has expanded North American defense ER&D capability. Quest is actively targeting BAE Electronic Systems (Nashua NH), Platforms & Services (York PA), and I&S (Herndon VA). Quest pitches embedded software, avionics, and EW engineering — direct overlap with Cyient's core BAE pitch.",
-      angle:"THREAT: Quest now has US defense engineering depth post Alpha-Numero. Counter: Cyient's Hyderabad delivery (no Quest office), DO-178C DAL A/B depth, and AS9100D credentials beat Quest on cost and certification pedigree. Emphasize Cyient's 20-year BAeHAL program knowledge." }
+      angle:"THREAT: Quest now has US defense engineering depth post Alpha-Numero. Counter: Cyient's DO-178C DAL A/B certification depth, S1000D tech pubs, ITAR-registered delivery, and AS9100D credentials — stronger certification pedigree on every BAE program Cyient targets." }
   ],
   events: [
     { name:"MRO Americas", date:"Apr 21–23, 2026", location:"Orlando, FL",
@@ -301,7 +299,7 @@ Object.values(BAE_DATA.divisions).forEach(d => {
     <div class="sidebar-label">Intelligence</div>
     <div class="sidebar-item" onclick="switchSection(event,'signals')">📡 Signal Chains</div>
     <div class="sidebar-item" onclick="switchSection(event,'hiring')">💼 Hiring Intelligence</div>
-    <div class="sidebar-item" onclick="switchSection(event,'india')">🇮🇳 India Strategy</div>
+    
     <div class="sidebar-item" onclick="switchSection(event,'competitive')">⚔️ Competitive Intel</div>
   <div class="sidebar-section">
     <div class="sidebar-label">Outreach Playbook</div>
@@ -478,13 +476,13 @@ Object.values(BAE_DATA.divisions).forEach(d => {
   <!-- Chain 7 -->
   <div style="background:white;border-radius:12px;padding:18px;margin-bottom:6px;border-left:5px solid #0f766e;box-shadow:0 1px 4px rgba(0,0,0,0.08);">
     <div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:10px;">
-      <div style="font-size:14px;font-weight:700;color:#0f766e;">🇮🇳 BAeHAL Bangalore — India Engineering CoE</div>
-      <span style="background:#fef3c7;color:#b45309;font-size:10px;font-weight:700;padding:3px 9px;border-radius:10px;">STRATEGIC ENTRY POINT</span>
+      <div style="font-size:14px;font-weight:700;color:#0f766e;">🇮🇳 India Delivery — Bangalore Presence</div>
+      <span style="background:#dcfce7;color:#166534;font-size:10px;font-weight:700;padding:3px 9px;border-radius:10px;">INDIA DELIVERY ACTIVE</span>
     </div>
-    <div style="font-size:12px;color:#555;margin-bottom:8px;">📍 <span class="loc-india">Bangalore, India</span> · BAeHAL Software Ltd (50/50 JV: BAE + HAL) · Est. 1993 · ~$31M revenue</div>
-    <div style="font-size:12px;line-height:1.7;color:#444;margin-bottom:8px;">BAeHAL (Bangalore) provides real-time embedded systems, simulation, IT services, technical publications, and ERP for clients including Airbus, Rolls-Royce, HAL, ISRO, and BEL. The JV demonstrates BAE's 30-year commitment to India engineering partnerships. <strong>No BAE engineering center exists in Hyderabad — this is a gap Cyient can fill.</strong> BAE's India strategy explicitly targets "in-country capabilities" and local defense manufacturing partnerships.</div>
-    <div style="font-size:11px;color:#555;"><strong>Cyient angle:</strong> Pitch Hyderabad as BAE's second India engineering hub — leverage Cyient's A&D pedigree, DO-178C practice, and proximity to HAL/DRDO/ISRO for a BAeHAL-style partnership in Hyderabad</div>
-    <div style="margin-top:8px;font-size:11px;color:#6b21a8;">📌 Target: BAE Systems India Leadership + BAeHAL Managing Director · Hyderabad gap = strategic pitch</div>
+    <div style="font-size:12px;color:#555;margin-bottom:8px;">📍 <span class="loc-india">Bangalore, India</span> · BAE Systems India (Services) Pvt Ltd · New Delhi HQ · Est. 2009</div>
+    <div style="font-size:12px;line-height:1.7;color:#444;margin-bottom:8px;">BAE's India footprint: government relations &amp; defense sales (New Delhi), offset program management, and the BAeHAL Bangalore JV with HAL (embedded systems, simulation, IT services, tech pubs for BAE platforms). BAE's "Make in India" offset obligations require deepening India supply chain and engineering capacity.</div>
+    <div style="font-size:11px;color:#555;"><strong>Cyient angle:</strong> Cyient's India A&amp;D delivery model — DO-178C, CATIA V5/V6, S1000D, MBSE — aligns with BAE's India engineering requirements. ITAR-registered for US program work. 30+ year A&amp;D pedigree across avionics, structural, and tech pubs.</div>
+    <div style="margin-top:8px;font-size:11px;color:#6b21a8;">📌 Entry: VP Engineering BAE Systems Inc. (Falls Church VA) for US programs · BAE Systems India MD for India-side offset and supply chain work</div>
   </div>
 </div>
 
@@ -494,7 +492,7 @@ Object.values(BAE_DATA.divisions).forEach(d => {
 
   <div style="background:linear-gradient(135deg,#4a148c,#6b21a8);border-radius:12px;padding:16px 20px;margin-bottom:22px;color:#fff;">
     <div style="font-size:13px;font-weight:700;margin-bottom:6px;">⚡ Account Context — £83.6B Backlog, 5 Active Ramps</div>
-    <div style="font-size:12px;line-height:1.7;opacity:.93;">BAE's record £83.6B backlog across 5 divisions means every engineering site is simultaneously ramping. GCAP (Air), Type 26 Norway deal (Maritime), CHIPS-funded MMIC expansion (Electronic Systems), land systems multi-program (Platforms & Services), and DARPA/Space Force (Cyber) all create distinct entry points. India's BAeHAL gap in Hyderabad is the highest-leverage strategic angle.</div>
+    <div style="font-size:12px;line-height:1.7;opacity:.93;">BAE's record £83.6B backlog across 5 divisions means every engineering site is simultaneously ramping. GCAP (Air), Type 26 Norway deal (Maritime), CHIPS-funded MMIC expansion (Electronic Systems), land systems multi-program (Platforms & Services), and DARPA/Space Force (Cyber) all create distinct entry points. DO-178C / S1000D depth and ITAR-registered India delivery are the highest-leverage strategic angles.</div>
   </div>
 
   <!-- AIR -->
@@ -556,15 +554,15 @@ Object.values(BAE_DATA.divisions).forEach(d => {
   </div>
 
   <!-- INDIA -->
-  <div style="border-radius:12px;overflow:hidden;margin-bottom:6px;border:1.5px solid #fde68a;">
-    <div style="background:linear-gradient(135deg,#78350f,#b45309);padding:14px 18px;color:#fff;">
-      <div style="font-size:14px;font-weight:700;">🇮🇳 India Strategy — BAeHAL + Hyderabad Gap</div>
-      <div style="font-size:11px;opacity:.85;margin-top:3px;">Bangalore (BAeHAL JV) · No Hyderabad presence · "In India, for India" strategy</div>
+  <div style="border-radius:12px;overflow:hidden;margin-bottom:6px;border:1.5px solid #bfdbfe;">
+    <div style="background:linear-gradient(135deg,#1e3a8a,#1d4ed8);padding:14px 18px;color:#fff;">
+      <div style="font-size:14px;font-weight:700;">🇮🇳 India Delivery — BAE "Make in India" Offset Program</div>
+      <div style="font-size:11px;opacity:.85;margin-top:3px;">40+ Indian MSME suppliers · M777 offset · "In India, for India" engineering drive</div>
     </div>
     <div style="padding:16px 18px;background:#fff;display:flex;flex-direction:column;gap:10px;">
-      <div style="display:flex;gap:11px;background:#fef9c3;border-radius:8px;padding:11px 14px;border-left:4px solid #78350f;">
-        <div style="background:#78350f;color:#fff;border-radius:50%;width:24px;height:24px;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700;flex-shrink:0;">1</div>
-        <div style="font-size:12px;line-height:1.6;"><strong>🔴 Pitch: Cyient as BAE's Hyderabad Engineering Hub (STRATEGIC PRIORITY)</strong><br/>BAeHAL (Bangalore, est. 1993) is BAE's only India engineering presence. BAE's India strategy explicitly targets "in-country capabilities" for aerospace, defense, simulation, and tech pubs. <strong>Hyderabad has no BAE presence</strong> despite being India's defense/aerospace engineering capital (DRDO, HAL, DRDL, ISRO, Bharat Dynamics all based here). Cyient's HQ, engineering infrastructure, and existing A&D relationships are in Hyderabad — pitch a BAeHAL-style partnership or preferred delivery partner arrangement for BAE's Hyderabad expansion.<br/><span style="color:#0055a5;">📌 Target: BAE Systems India Country Head + BAeHAL MD — Executive relationship pitch</span><br/><span style="color:#b71c1c;font-size:11px;">⚡ Action: Executive briefing deck positioning Cyient as BAE Hyderabad delivery partner · Leverage BAeHAL precedent</span></div>
+      <div style="display:flex;gap:11px;background:#eff6ff;border-radius:8px;padding:11px 14px;border-left:4px solid #1d4ed8;">
+        <div style="background:#1d4ed8;color:#fff;border-radius:50%;width:24px;height:24px;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700;flex-shrink:0;">1</div>
+        <div style="font-size:12px;line-height:1.6;"><strong>Pitch: Cyient as BAE's India Engineering Delivery Partner</strong><br/>BAE's India offset obligations (M777, future FMS programs) require deepening India supply chain and engineering capacity. Cyient's 30+ year India A&D pedigree — DO-178C, CATIA V5/V6, S1000D, MBSE — maps directly to BAE's India engineering needs. ITAR-registered for US program work.<br/><span style="color:#0055a5;">📌 Target: BAE Systems India MD (New Delhi) for offset and supply chain partnership · VP Engineering BAE Systems Inc. (Falls Church) for US program India delivery</span><br/><span style="color:#b71c1c;font-size:11px;">⚡ Action: India A&D capability briefing focused on offset-qualifying engineering services and Make in India program support</span></div>
       </div>
     </div>
   </div>
@@ -594,34 +592,6 @@ Object.values(BAE_DATA.divisions).forEach(d => {
   </div>
 </div>
 
-<!-- ══════ INDIA STRATEGY ══════ -->
-<div id="india" class="section">
-  <div class="section-title">🇮🇳 India Strategy — BAeHAL & Hyderabad Opportunity</div>
-  <div class="grid-2">
-    <div class="card">
-      <div class="card-title">BAeHAL Software Ltd — Existing JV</div>
-      <table style="width:100%;font-size:12px;border-collapse:collapse;">
-        <tr style="border-bottom:1px solid #eee;"><td style="padding:7px 0;color:#666;">JV Partners</td><td style="padding:7px 0;font-weight:600;">BAE Systems (50%) + Hindustan Aeronautics Ltd (50%)</td></tr>
-        <tr style="border-bottom:1px solid #eee;"><td style="padding:7px 0;color:#666;">Established</td><td style="padding:7px 0;font-weight:600;">1993 — 30+ years of India engineering</td></tr>
-        <tr style="border-bottom:1px solid #eee;"><td style="padding:7px 0;color:#666;">Location</td><td style="padding:7px 0;font-weight:600;">Bangalore, India + UK branch office</td></tr>
-        <tr style="border-bottom:1px solid #eee;"><td style="padding:7px 0;color:#666;">Revenue</td><td style="padding:7px 0;font-weight:600;">~$31M annually</td></tr>
-        <tr style="border-bottom:1px solid #eee;"><td style="padding:7px 0;color:#666;">Services</td><td style="padding:7px 0;font-weight:600;">Real-time embedded systems, simulation, IT, ERP, tech pubs</td></tr>
-        <tr><td style="padding:7px 0;color:#666;">Clients</td><td style="padding:7px 0;font-weight:600;">Airbus, Rolls-Royce, British Airways, HAL, ISRO, BEL, DRDO</td></tr>
-      </table>
-    </div>
-    <div class="card">
-      <div class="card-title">Hyderabad Gap — Cyient's Opening</div>
-      <div style="background:#fdecea;padding:12px;border-radius:6px;margin-bottom:12px;border-left:3px solid #c62828;font-size:12px;line-height:1.7;">
-        <strong style="color:#c62828;">❌ BAE has NO Hyderabad engineering presence</strong><br/>
-        Despite Hyderabad being India's defense/aerospace capital: DRDO HQ · DRDL · HAL (Hyderabad Division) · BDL · ISRO NRSC · Bharat Electronics Ltd. BAE is missing from this ecosystem entirely.
-      </div>
-      <div style="background:#e8f5e9;padding:12px;border-radius:6px;border-left:3px solid #1b5e20;font-size:12px;line-height:1.7;">
-        <strong style="color:#1b5e20;">✅ Cyient's Hyderabad Position</strong><br/>
-        Cyient HQ is in Hyderabad. Existing relationships with DRDO, HAL, BDL, ISRO. 30+ year A&D pedigree. Same talent pool BAE would need. Pitch: Cyient as BAE's preferred Hyderabad delivery partner — extension of the BAeHAL model into India's defense capital.
-      </div>
-    </div>
-  </div>
-</div>
 
 
 <!-- ═══ OUTREACH PLAYBOOK ═══ -->
@@ -657,7 +627,7 @@ Object.values(BAE_DATA.divisions).forEach(d => {
   <!-- QUEST GLOBAL SPOTLIGHT -->
   <div style="background:linear-gradient(135deg,#b91c1c,#dc2626);border-radius:10px;padding:14px 18px;margin-bottom:18px;color:#fff;">
     <div style="font-size:13px;font-weight:800;margin-bottom:6px;">🚨 PRIORITY WATCH — Quest Global (post Alpha-Numero Acquisition)</div>
-    <div style="font-size:12px;line-height:1.7;opacity:.95;">Quest Global acquired <strong>Alpha-Numero</strong> (Canadian A&amp;D ER&amp;D firm, ~400 engineers, strong defense electronics) — significantly expanding Quest's North American defense engineering footprint. Quest now targets <strong>BAE Electronic Systems (Nashua NH), Platforms &amp; Services (York PA), and Intelligence &amp; Security (Herndon VA)</strong> with embedded software, avionics, and EW engineering services. Quest's revised pitch: North American delivery + offshore India blended model. <strong>Cyient counter:</strong> Hyderabad delivery (Quest has no Hyderabad office), DO-178C DAL A/B depth, BAeHAL program knowledge, S1000D tech pubs, and ITAR-registered status. Beat Quest on cost-quality blend and certification pedigree.</div>
+    <div style="font-size:12px;line-height:1.7;opacity:.95;">Quest Global acquired <strong>Alpha-Numero</strong> (Canadian A&amp;D ER&amp;D firm, ~400 engineers, strong defense electronics) — significantly expanding Quest's North American defense engineering footprint. Quest now targets <strong>BAE Electronic Systems (Nashua NH), Platforms &amp; Services (York PA), and Intelligence &amp; Security (Herndon VA)</strong> with embedded software, avionics, and EW engineering services. Quest's revised pitch: North American delivery + offshore India blended model. <strong>Cyient counter:</strong> DO-178C DAL A/B certification depth, S1000D tech pubs, ITAR-registered delivery, and AS9100/NADCAP credentials. Beat Quest on certification pedigree and India A&D program depth.</div>
   </div>
 
   <!-- Verify Global secondary watch -->
@@ -674,7 +644,7 @@ Object.values(BAE_DATA.divisions).forEach(d => {
         <div style="padding:10px;background:#fdecea;border-radius:6px;margin-bottom:10px;border-left:3px solid #c62828;">
           <strong style="color:#c62828;">🔴 HIGH THREAT — US Sites</strong><br/>
           <strong>Quest Global (post Alpha-Numero)</strong> — Expanded NA defense ER&amp;D. Targeting Nashua NH, York PA, Herndon VA. Embedded SW, avionics, EW.<br/>
-          <strong>LTTS (L&amp;T Technology Services)</strong> — India A&amp;D anchor, competing at BAE India (BAeHAL programs) and US programs via offshore delivery. Aggressive on pricing.<br/>
+          <strong>LTTS (L&amp;T Technology Services)</strong> — India A&amp;D anchor, competing on BAE US programs via offshore India delivery. Aggressive on pricing.<br/>
           <strong>HCL Engineering Services</strong> — Confirmed BAE vendor. PLM administration, digital engineering, embedded systems at multiple US sites.
         </div>
         <div style="padding:10px;background:#fff3e0;border-radius:6px;margin-bottom:10px;border-left:3px solid #e65100;">
@@ -685,7 +655,7 @@ Object.values(BAE_DATA.divisions).forEach(d => {
         </div>
         <div style="padding:10px;background:#e8f5e9;border-radius:6px;border-left:3px solid #1b5e20;">
           <strong style="color:#1b5e20;">🟢 Cyient Position</strong><br/>
-          Hyderabad delivery (zero competitor has this), DO-178C DAL A/B, S1000D tech pubs, ITAR-registered, AS9100/NADCAP, BAeHAL program DNA.
+          DO-178C DAL A/B depth, S1000D tech pubs, ITAR-registered delivery, AS9100/NADCAP credentials, and 30+ year A&D program pedigree.
         </div>
       </div>
     </div>
@@ -708,11 +678,11 @@ Object.values(BAE_DATA.divisions).forEach(d => {
         </div>
         <div style="padding:8px 0;border-bottom:1px solid #f0f0f0;display:flex;gap:10px;">
           <span style="color:#16a34a;font-size:14px;flex-shrink:0;">✅</span>
-          <div><strong>Hyderabad Delivery:</strong> BAeHAL covers Bangalore only. Cyient is the only A&amp;D engineering firm with Hyderabad HQ — pitch as BAE's second India city extension with DRDO/HAL co-location advantage.</div>
+          <div><strong>India Delivery (Bangalore + Beyond):</strong> Cyient's India A&amp;D delivery model — DO-178C, CATIA V5/V6, S1000D, MBSE — maps directly to BAE's India engineering requirements. ITAR-registered for US program delivery.</div>
         </div>
         <div style="padding:8px 0;display:flex;gap:10px;">
           <span style="color:#16a34a;font-size:14px;flex-shrink:0;">✅</span>
-          <div><strong>Quest Counter Playbook:</strong> Quest/Alpha-Numero = NA delivery + India blend but NO Hyderabad, NO S1000D pubs depth, weaker DO-178C DAL A pedigree. Lead with certification credentials and Cyient's 20-year BAeHAL program DNA.</div>
+          <div><strong>Quest Counter Playbook:</strong> Quest/Alpha-Numero = NA delivery + India blend, but weaker DO-178C DAL A/B pedigree and no S1000D technical publications depth. Lead with certification credentials — Cyient's DO-178C, AS9100, and NADCAP stack is the differentiator.</div>
         </div>
       </div>
     </div>
@@ -880,10 +850,7 @@ Object.values(BAE_DATA.divisions).forEach(d => {
     </div>
   </div>
 
-  <!-- India Bridge -->
-  <div style="background:#f9fafb;border:1px solid #e5e7eb;border-radius:8px;padding:12px 16px;font-size:12px;color:#374151;">
-    <strong>🇮🇳 India Delivery Bridge:</strong> BAeHAL (Bangalore) is BAE's 30-year India engineering JV — embedded systems, simulation, tech pubs. BAeHAL has <em>no Hyderabad presence</em>. Pitch Cyient as BAE's Hyderabad engineering delivery arm — DRDO, HAL, BDL all co-located with Cyient HQ. Entry through VP Engineering BAE Systems Inc. (Falls Church) or VP Engineering Electronic Systems (Nashua NH).
-  </div>
+
 </div>
 <!-- ══════ SKILLS ══════ -->
 <div id="skills" class="section">
@@ -907,7 +874,7 @@ Object.values(BAE_DATA.divisions).forEach(d => {
     <div class="card">
       <div class="card-title">Why Cyient Wins at BAE</div>
       <div style="font-size:12px;line-height:1.9;color:#444;">
-        <div style="padding:10px;background:#e8f5e9;border-radius:6px;margin-bottom:10px;border-left:3px solid #1b5e20;"><strong style="color:#1b5e20;">🇮🇳 Hyderabad Gap</strong><br/>Only major A&D engineering firm with HQ in India's defense capital — BAE has no Hyderabad presence. Pitch: Cyient as BAE's Hyderabad delivery partner (extension of BAeHAL model).</div>
+        <div style="padding:10px;background:#e8f5e9;border-radius:6px;margin-bottom:10px;border-left:3px solid #1b5e20;"><strong style="color:#1b5e20;">🇮🇳 India Delivery Depth</strong><br/>30+ year India A&amp;D pedigree. ITAR-registered. DO-178C, S1000D, CATIA V5/V6, MBSE — full capability stack for BAE India offset obligations and US program India delivery.</div>
         <div style="padding:10px;background:#dbeafe;border-radius:6px;margin-bottom:10px;border-left:3px solid #1d4ed8;"><strong style="color:#1d4ed8;">✈️ GCAP Ground Floor</strong><br/>GCAP engineering teams being assembled now. Position early on digital engineering/MBSE before frameworks and vendor lists are locked in.</div>
         <div style="padding:10px;background:#e0f2fe;border-radius:6px;border-left:3px solid #0e7490;"><strong style="color:#0e7490;">💻 DO-178C at Nashua</strong><br/>MMIC expansion + F-35 EW upgrades require DO-178C/DO-254 certified SW engineers — Cyient's certification practice maps directly to BAE Electronic Systems' hardest-to-fill roles.</div>
       </div>
