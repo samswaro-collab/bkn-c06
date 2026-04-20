@@ -8,19 +8,19 @@
 <style>
 *{margin:0;padding:0;box-sizing:border-box;}
 body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;background:#f5f5f5;color:#333;overflow-x:hidden;}
-.topbar{background:#1a1a2e;color:white;padding:12px 20px;display:flex;align-items:center;gap:20px;border-bottom:3px solid #6b21a8;position:sticky;top:0;z-index:100;}
-.logo-pill{background:white;color:#6b21a8;padding:6px 12px;border-radius:20px;font-weight:bold;font-size:13px;}
+.topbar{background:#1a1a2e;color:white;padding:12px 20px;display:flex;align-items:center;gap:20px;border-bottom:3px solid #005a9e;position:sticky;top:0;z-index:100;}
+.logo-pill{background:white;color:#005a9e;padding:6px 12px;border-radius:20px;font-weight:bold;font-size:13px;}
 .topbar-title{flex:1;font-size:18px;font-weight:600;}
 .pill{background:rgba(255,255,255,0.15);padding:5px 10px;border-radius:15px;font-size:12px;}
 .pill-status{background:#4caf50;padding:5px 10px;border-radius:15px;font-size:12px;}
-.refresh-banner{background:#6b21a8;color:white;padding:10px 20px;display:flex;justify-content:space-between;align-items:center;font-size:13px;position:sticky;top:50px;z-index:99;}
+.refresh-banner{background:#005a9e;color:white;padding:10px 20px;display:flex;justify-content:space-between;align-items:center;font-size:13px;position:sticky;top:50px;z-index:99;}
 .container{display:flex;min-height:calc(100vh - 80px);}
 .sidebar{width:240px;background:#1a1a2e;color:white;padding:20px 0;overflow-y:auto;height:calc(100vh - 80px);position:sticky;top:80px;}
 .sidebar-label{font-size:11px;font-weight:700;text-transform:uppercase;color:#999;padding:0 15px;margin-bottom:8px;letter-spacing:0.5px;}
 .sidebar-section{margin-bottom:22px;}
 .sidebar-item{padding:10px 15px;cursor:pointer;font-size:13px;transition:all 0.2s;border-left:3px solid transparent;}
-.sidebar-item:hover{background:rgba(107,33,168,0.15);}
-.sidebar-item.active{background:rgba(107,33,168,0.25);border-left-color:#6b21a8;font-weight:600;}
+.sidebar-item:hover{background:rgba(0,90,158,0.15);}
+.sidebar-item.active{background:rgba(0,90,158,0.25);border-left-color:#005a9e;font-weight:600;}
 .sidebar-meta{font-size:10px;color:#aaa;padding:2px 15px 8px 15px;line-height:1.4;}
 .main-content{flex:1;padding:30px;overflow-y:auto;height:calc(100vh - 80px);}
 .section{display:none;}
@@ -29,22 +29,22 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;b
 .grid-2{display:grid;grid-template-columns:repeat(2,1fr);gap:20px;margin-bottom:25px;}
 .grid-3{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;margin-bottom:25px;}
 .grid-4{display:grid;grid-template-columns:repeat(4,1fr);gap:20px;margin-bottom:25px;}
-.card{background:white;border-radius:8px;padding:20px;box-shadow:0 1px 3px rgba(0,0,0,0.1);border-top:3px solid #6b21a8;}
+.card{background:white;border-radius:8px;padding:20px;box-shadow:0 1px 3px rgba(0,0,0,0.1);border-top:3px solid #005a9e;}
 .card-title{font-size:13px;font-weight:700;text-transform:uppercase;color:#666;margin-bottom:15px;letter-spacing:0.5px;}
 .kpi{font-size:32px;font-weight:700;color:#1a1a2e;margin-bottom:5px;}
 .kpi-label{font-size:12px;color:#999;}
 .kpi-change{font-size:12px;color:#4caf50;margin-top:5px;}
 .tag{display:inline-block;background:#f0f0f0;color:#333;padding:4px 10px;border-radius:12px;font-size:11px;font-weight:600;margin-right:6px;margin-bottom:6px;}
-.tag-accent{background:rgba(107,33,168,0.12);color:#6b21a8;}
+.tag-accent{background:rgba(0,90,158,0.12);color:#005a9e;}
 .tag-hot{background:#fdecea;color:#c62828;}
-.contact-card{background:white;border-radius:6px;padding:15px;border-left:3px solid #6b21a8;margin-bottom:12px;font-size:12px;}
+.contact-card{background:white;border-radius:6px;padding:15px;border-left:3px solid #005a9e;margin-bottom:12px;font-size:12px;}
 .contact-name{font-weight:600;color:#1a1a2e;margin-bottom:2px;}
 .contact-title{color:#666;font-size:11px;margin-bottom:5px;}
 .contact-location{color:#999;font-size:10px;}
 .prog-row{margin-bottom:15px;}
 .prog-label{display:flex;justify-content:space-between;font-size:11px;font-weight:600;color:#666;margin-bottom:5px;}
 .prog-bar{width:100%;height:8px;background:#e0e0e0;border-radius:4px;overflow:hidden;}
-.prog-fill{height:100%;background:#6b21a8;border-radius:4px;}
+.prog-fill{height:100%;background:#005a9e;border-radius:4px;}
 .loc-us{background:#dbeafe;color:#1e40af;padding:2px 7px;border-radius:10px;font-size:10px;font-weight:700;}
 .loc-uk{background:#fce7f3;color:#9d174d;padding:2px 7px;border-radius:10px;font-size:10px;font-weight:700;}
 .loc-india{background:#fef3c7;color:#92400e;padding:2px 7px;border-radius:10px;font-size:10px;font-weight:700;}
@@ -63,16 +63,16 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;b
 .div-legend-pct{font-weight:700;color:#1a1a2e;}
 .div-center-label{position:absolute;text-align:center;pointer-events:none;}
 .div-center-rev{font-size:13px;font-weight:800;color:#1a1a2e;}
-.div-center-d{font-size:10px;color:#6b21a8;font-weight:700;}
+.div-center-d{font-size:10px;color:#005a9e;font-weight:700;}
 
 /* entities bar */
 .entities-bar{display:grid;grid-template-columns:1fr auto 1fr;gap:16px;align-items:center;margin-bottom:22px;}
-.entity-box{background:white;border-radius:8px;padding:14px 18px;box-shadow:0 1px 3px rgba(0,0,0,0.1);border-left:4px solid #6b21a8;}
+.entity-box{background:white;border-radius:8px;padding:14px 18px;box-shadow:0 1px 3px rgba(0,0,0,0.1);border-left:4px solid #005a9e;}
 .entity-name{font-size:13px;font-weight:800;color:#1a1a2e;}
-.entity-sub{font-size:11px;color:#6b21a8;font-weight:600;margin-top:2px;}
-.sites-box{background:linear-gradient(135deg,#6b21a8,#7e22ce);color:white;border-radius:8px;padding:14px 18px;text-align:center;font-size:11px;font-weight:700;line-height:1.8;}
+.entity-sub{font-size:11px;color:#005a9e;font-weight:600;margin-top:2px;}
+.sites-box{background:linear-gradient(135deg,#005a9e,#004f86);color:white;border-radius:8px;padding:14px 18px;text-align:center;font-size:11px;font-weight:700;line-height:1.8;}
 
-::-webkit-scrollbar{width:8px;}::-webkit-scrollbar-track{background:#f1f1f1;}::-webkit-scrollbar-thumb{background:#6b21a8;border-radius:4px;}
+::-webkit-scrollbar{width:8px;}::-webkit-scrollbar-track{background:#f1f1f1;}::-webkit-scrollbar-thumb{background:#005a9e;border-radius:4px;}
 @media(max-width:1400px){.divisions-overview{grid-template-columns:repeat(3,1fr);}.grid-4{grid-template-columns:repeat(2,1fr);}}
 @media(max-width:1100px){.divisions-overview{grid-template-columns:repeat(2,1fr);}}
 </style>
@@ -117,15 +117,28 @@ const BAE_DATA = {
       salesPct:   22,
       employeePct:18,
       defensePct: 87,
+      usHq:       "Nashua, NH",
       color: "#0e7490",
       lightBg: "#e0f2fe",
       sub: [
-        { label:"Electronic Combat",           pct:30, color:"#0e7490" },
-        { label:"C4ISR Systems",               pct:23, color:"#0891b2" },
-        { label:"Precision Strike & Sensing",  pct:17, color:"#22d3ee" },
-        { label:"Countermeasure & EMA",        pct:14, color:"#67e8f9" },
-        { label:"Controls & Avionics",         pct:13, color:"#a5f3fc" },
-        { label:"Power & Propulsion",          pct: 3, color:"#cffafe" }
+        { label:"Electronic Combat",          pct:30, color:"#0e7490",
+          us:["Nashua, NH (HQ)","Greenlawn, NY","Merrimack, NH (FAST Labs)"],
+          progs:["F-35 EW Suite AN/ASQ-239","Naval EW systems","CHIPS-funded MMIC ($35.5M)"] },
+        { label:"C4ISR Systems",              pct:23, color:"#0891b2",
+          us:["Nashua, NH","Maple Grove, MN ⭐ NEW 247K sq ft Sept 2025","Fort Wayne, IN"],
+          progs:["SIGINT platforms","Sensor fusion / ISR","Precision projectiles"] },
+        { label:"Precision Strike & Sensing", pct:17, color:"#22d3ee",
+          us:["Hudson, NH (APKWS production)","Austin, TX (390K sq ft)","Whippany, NJ","Bristol, PA"],
+          progs:["APKWS laser rockets $1.7B / 11K units","LR-PGK guidance kits","EO/IR countermeasures"] },
+        { label:"Countermeasure & EMA",       pct:14, color:"#67e8f9",
+          us:["Austin, TX","Nashua, NH","Merrimack, NH"],
+          progs:["Vehicle countermeasure systems","Survivability / EW pods","Electronic attack"] },
+        { label:"Controls & Avionics",        pct:13, color:"#a5f3fc",
+          us:["Nashua, NH","Endicott, NY ($65M expansion — battery, 2027)"],
+          progs:["Flight & engine controls","Power & energy management","Battery systems"] },
+        { label:"Power & Propulsion",         pct: 3, color:"#cffafe",
+          us:["Endicott, NY","Santa Clara, CA (P&E SIL)"],
+          progs:["Hybrid-electric drive","Energy storage / EV systems"] }
       ]
     },
     platforms: {
@@ -133,16 +146,31 @@ const BAE_DATA = {
       salesPct:   16,
       employeePct:13,
       defensePct: 55,
+      usHq:       "York, PA / Sterling Heights, MI",
       color: "#4b5563",
       lightBg: "#f3f4f6",
       sub: [
-        { label:"Combat Mission Systems", pct:52, color:"#374151" },
-        { label:"US Ship Repair",         pct:17, color:"#4b5563" },
-        { label:"Ordnance Systems",       pct:16, color:"#6b7280" },
-        { label:"BAE Systems Hägglunds",  pct: 7, color:"#9ca3af" },
-        { label:"BAE Systems Bofors",     pct: 4, color:"#d1d5db" },
-        { label:"Weapon Systems UK",      pct: 2, color:"#e5e7eb" },
-        { label:"FNSS",                   pct: 2, color:"#f3f4f6" }
+        { label:"Combat Mission Systems", pct:52, color:"#374151",
+          us:["York, PA (~3,000 emp — AMPV, M777)","Sterling Heights, MI (~2,500 emp — M1 Abrams)","San Jose, CA (ACV / Monster Garage)","Elgin, IL","Anniston, AL","Aiken, SC"],
+          progs:["AMPV $4.6B","M1A2 Abrams SEPv3","Amphibious Combat Vehicle ACV","M10 Booker"] },
+        { label:"US Ship Repair",         pct:17, color:"#4b5563",
+          us:["Norfolk, VA (109 acres, ~2,200 emp)","San Diego, CA (20 acres, ~1,750 emp)","Jacksonville, FL (101 acres, ~550 emp)"],
+          progs:["US Navy destroyer / frigate MRO","LCS maintenance","Aircraft carrier overhaul"] },
+        { label:"Ordnance Systems",       pct:16, color:"#6b7280",
+          us:["Kingsport, TN (Holston AAP — GOCO)","Radford, VA (RAAP — GOCO)","Cedar Rapids, IA"],
+          progs:["RDX / HMX explosive mfg","Propellant production","Ammunition modernisation"] },
+        { label:"BAE Systems Hägglunds",  pct: 7, color:"#9ca3af",
+          us:["US BD: Arlington, VA (Sweden HQ: Örnsköldsvik)"],
+          progs:["BvS10 all-terrain vehicle","CV90 tracked IFV — US Marine Corps interest"] },
+        { label:"BAE Systems Bofors",     pct: 4, color:"#d1d5db",
+          us:["Programs via York, PA (Sweden HQ: Karlskoga)"],
+          progs:["M777 Howitzer (mfg York PA)","Artillery shells","Gun systems"] },
+        { label:"Weapon Systems UK",      pct: 2, color:"#e5e7eb",
+          us:["US customer BD: Falls Church, VA"],
+          progs:["Challenger 3","AS90 artillery (Ukraine export)"] },
+        { label:"FNSS",                   pct: 2, color:"#f3f4f6",
+          us:["Turkish JV — no US sites"],
+          progs:["APC variants for Middle East export"] }
       ]
     },
     cyber: {
@@ -150,13 +178,22 @@ const BAE_DATA = {
       salesPct:    9,
       employeePct:12,
       defensePct: 94,
+      usHq:       "Falls Church, VA / McLean, VA",
       color: "#b45309",
       lightBg: "#fef3c7",
       sub: [
-        { label:"Digital Intelligence",        pct:33, color:"#92400e" },
-        { label:"Intelligence Solutions",      pct:30, color:"#b45309" },
-        { label:"Integrated Defense Solutions",pct:21, color:"#d97706" },
-        { label:"Air Force Solutions",         pct:16, color:"#fbbf24" }
+        { label:"Digital Intelligence",         pct:33, color:"#92400e",
+          us:["Falls Church, VA (HQ)","Herndon, VA","McLean, VA","Burlington, MA"],
+          progs:["NATO intelligence systems","Cyber operations","GEOINT","DARPA autonomous tracking $16M"] },
+        { label:"Intelligence Solutions",       pct:30, color:"#b45309",
+          us:["Herndon, VA"],
+          progs:["SIGINT analysis","C4I systems","Space Force missile warning $1.2B"] },
+        { label:"Integrated Defense Solutions", pct:21, color:"#d97706",
+          us:["Rockville, MD (~4,400 emp)","Quantico, VA","Mount Laurel, NJ"],
+          progs:["Defense IT & systems integration","DoD software engineering"] },
+        { label:"Air Force Solutions",          pct:16, color:"#fbbf24",
+          us:["Broomfield, CO (HQ)","Boulder, CO (~2,000 emp, 700K sq ft)","Colorado Springs, CO","Salt Lake City, UT ⭐ NEW Jan 2026 — ICBM","Hanscom AFB area, MA"],
+          progs:["GPS ground systems","Space Force satellite ops","Sentinel GBSD / Minuteman III","USAF mission systems"] }
       ]
     },
     air: {
@@ -164,14 +201,25 @@ const BAE_DATA = {
       salesPct:   33,
       employeePct:26,
       defensePct: 57,
+      usHq:       "UK-led (Warton / Samlesbury) — US content via Electronic Systems",
       color: "#1d4ed8",
       lightBg: "#dbeafe",
       sub: [
-        { label:"European & International", pct:34, color:"#1e3a8a" },
-        { label:"Kingdom of Saudi Arabia",  pct:33, color:"#1d4ed8" },
-        { label:"MBDA",                     pct:17, color:"#3b82f6" },
-        { label:"US Programmes",            pct:14, color:"#60a5fa" },
-        { label:"FCAS",                     pct: 2, color:"#bfdbfe" }
+        { label:"European & International", pct:34, color:"#1e3a8a",
+          us:["UK: Warton, Samlesbury, Brough — no direct US sites"],
+          progs:["Typhoon Tranche 3 / ECRS Mk2 £454M","Eurofighter export (Turkey €4B, Saudi)"] },
+        { label:"Kingdom of Saudi Arabia",  pct:33, color:"#1d4ed8",
+          us:["Saudi BD: Falls Church, VA (BAE Inc. liaison)"],
+          progs:["Typhoon Saudi fleet","Al-Salam aircraft programme"] },
+        { label:"MBDA",                     pct:17, color:"#3b82f6",
+          us:["UK/France JV — US engagement via Lockheed / MBDA Inc."],
+          progs:["Meteor AAM","Brimstone","SPEAR-EW"] },
+        { label:"US Programmes",            pct:14, color:"#60a5fa",
+          us:["Falls Church, VA","Warton UK (aft fuselage engineering)","Samlesbury UK (manufacturing)"],
+          progs:["F-35 aft fuselage / tails (15% workshare per aircraft)","APKWS (via Electronic Systems)"] },
+        { label:"FCAS / GCAP",              pct: 2, color:"#bfdbfe",
+          us:["UK: Warton — Edgewing JV £686M (Apr 2026)"],
+          progs:["6th-gen fighter NPI — GCAP (UK/Italy/Japan)"] }
       ]
     },
     maritime: {
@@ -179,16 +227,93 @@ const BAE_DATA = {
       salesPct:   20,
       employeePct:26,
       defensePct: 68,
+      usHq:       "UK-led (Govan / Barrow-in-Furness) — US programmes via Falls Church VA",
       color: "#0f766e",
       lightBg: "#ccfbf1",
       sub: [
-        { label:"Submarines",  pct:41, color:"#134e4a" },
-        { label:"Naval Ships", pct:33, color:"#0f766e" },
-        { label:"Australia",   pct:19, color:"#14b8a6" },
-        { label:"Land UK",     pct: 7, color:"#99f6e4" }
+        { label:"Submarines",  pct:41, color:"#134e4a",
+          us:["UK: Barrow-in-Furness — no direct US sites"],
+          progs:["Dreadnought-class SSBNs","Astute-class SSNs"] },
+        { label:"Naval Ships", pct:33, color:"#0f766e",
+          us:["UK: Govan / Rosyth — US BD: Falls Church VA"],
+          progs:["Type 26 frigate (5 under build)","Norway £10B deal (5+ ships)"] },
+        { label:"Australia",   pct:19, color:"#14b8a6",
+          us:["Australia: Osborne, SA — US liaison: Falls Church VA"],
+          progs:["Hunter-class frigates (9 ships)","AUKUS submarine programme"] },
+        { label:"Land UK",     pct: 7, color:"#99f6e4",
+          us:["UK: Bovington / Telford — no direct US sites"],
+          progs:["Challenger 3 upgrade","AJAX armoured vehicle (UK Army)"] }
       ]
     },
   },
+
+  // ── US Site Footprint ─────────────────────────────────────────────────
+  usSites: [
+    { site:"Nashua, NH",          div:"Electronic Systems",      subdiv:"Electronic Combat · C4ISR · Controls & Avionics",
+      headcount:"~5,000+",        hiring:"🔴 HOT — 200+ active roles",
+      progs:["F-35 EW Suite (AN/ASQ-239)","MMIC chips (CHIPS Act $35.5M — quadrupling capacity)","Naval EW","C4ISR systems"],
+      cyient:"Embedded SW (C/C++/VHDL), DO-178C cert, FPGA design (DO-254), RF/microwave eng, EW systems integration" },
+    { site:"Maple Grove, MN",     div:"Electronic Systems",      subdiv:"C4ISR Systems ⭐ NEW FACILITY",
+      headcount:"500+ (new 2025)", hiring:"🔴 HOT — 500 new hires planned 2025–2026",
+      progs:["SIGINT & sensor fusion","Precision projectiles","Advanced military electronics for C4ISR"],
+      cyient:"Systems engineering, electronics manufacturing support, SW integration, test & verification for C4ISR platforms" },
+    { site:"Austin, TX",          div:"Electronic Systems",      subdiv:"Precision Strike & Sensing · Countermeasure & EMA",
+      headcount:"~1,500",         hiring:"🟠 ACTIVE",
+      progs:["APKWS laser-guided rockets ($1.7B / 11K units)","LR-PGK guidance kits","Vehicle countermeasure systems"],
+      cyient:"Precision systems engineering, guidance system verification, munitions tech pubs, DO-160 environmental test" },
+    { site:"Endicott, NY",        div:"Electronic Systems",      subdiv:"Controls & Avionics · Power & Propulsion",
+      headcount:"~1,200",         hiring:"🟠 ACTIVE — $65M expansion underway",
+      progs:["Flight & engine controls","Power & energy management","Battery systems (2027 expansion)"],
+      cyient:"Controls engineering, battery system verification, power electronics design, DO-160 test documentation" },
+    { site:"Fort Wayne, IN",      div:"Electronic Systems",      subdiv:"C4ISR Systems",
+      headcount:"~500",           hiring:"🟡 MODERATE",
+      progs:["Electronic systems for ground vehicles","C4ISR electronics manufacturing"],
+      cyient:"Electronics manufacturing engineering, systems integration test, SW development support (non-cleared)" },
+    { site:"York, PA",            div:"Platforms & Services",    subdiv:"Combat Mission Systems",
+      headcount:"~3,000",         hiring:"🟠 ACTIVE",
+      progs:["AMPV ($4.6B programme)","M777 Howitzer production","Bradley IFV modernisation"],
+      cyient:"Armored vehicle systems engineering, integration test, S1000D tech pubs, structural analysis, manufacturing engineering" },
+    { site:"Sterling Heights, MI",div:"Platforms & Services",    subdiv:"Combat Mission Systems",
+      headcount:"~2,500",         hiring:"🟠 ACTIVE",
+      progs:["M1A2 Abrams SEPv3 production","Next-gen combat vehicle studies","AMPV support"],
+      cyient:"Vehicle systems engineering, turret/weapon system integration, electronics integration, CAD design, tech pubs" },
+    { site:"San Jose, CA",        div:"Platforms & Services",    subdiv:"Combat Mission Systems (Vehicle Integration Lab)",
+      headcount:"~500",           hiring:"🟡 MODERATE",
+      progs:["Amphibious Combat Vehicle ACV (US Marine Corps)","M10 Booker","Hybrid-electric vehicle R&D"],
+      cyient:"Vehicle integration documentation, systems simulation, CAD design support, test & evaluation support" },
+    { site:"Norfolk, VA",         div:"Platforms & Services",    subdiv:"US Ship Repair",
+      headcount:"~2,200",         hiring:"🟠 ACTIVE",
+      progs:["US Navy destroyer / frigate MRO","LCS maintenance","Aircraft carrier overhaul (109-acre drydock facility)"],
+      cyient:"Naval S1000D tech pubs, CMM/IPC authoring, ship systems engineering, MRO documentation — clear whitespace vs competitors" },
+    { site:"San Diego, CA",       div:"Platforms & Services",    subdiv:"US Ship Repair",
+      headcount:"~1,750",         hiring:"🟡 MODERATE",
+      progs:["US Navy ship MRO","Submarine maintenance","LCS / DDG overhaul (20-acre facility)"],
+      cyient:"Naval tech pubs, overhaul documentation, S1000D, structural engineering support" },
+    { site:"Jacksonville, FL",    div:"Platforms & Services",    subdiv:"US Ship Repair",
+      headcount:"~550",           hiring:"🟡 MODERATE",
+      progs:["US Navy ship maintenance","Destroyer overhaul (101-acre St. Johns River facility)"],
+      cyient:"Ship MRO documentation, structural engineering, S1000D authoring" },
+    { site:"Cedar Rapids, IA",    div:"Platforms & Services",    subdiv:"Ordnance Systems",
+      headcount:"~400",           hiring:"🟡 MODERATE",
+      progs:["Ordnance / ammunition engineering support","Defense electronics manufacturing"],
+      cyient:"Manufacturing engineering support, technical documentation, quality engineering" },
+    { site:"Falls Church, VA",    div:"Cyber & Intelligence (I&S HQ)", subdiv:"Digital Intelligence · Corp HQ",
+      headcount:"~3,000+",        hiring:"🟠 ACTIVE",
+      progs:["US DoD cyber operations","NATO systems","BAE Systems Inc. corporate HQ — all US divisions"],
+      cyient:"Digital engineering, systems integration, MBSE, Azure cloud engineering (BAE runs Azure for US defense workloads)" },
+    { site:"Rockville, MD",       div:"Cyber & Intelligence",    subdiv:"Integrated Defense Solutions",
+      headcount:"~4,400+",        hiring:"🟠 ACTIVE",
+      progs:["Defense IT & systems integration","DoD SW engineering"],
+      cyient:"Software engineering (non-cleared roles), systems integration, digital transformation at scale" },
+    { site:"Boulder / Broomfield, CO", div:"Cyber & Intelligence", subdiv:"Air Force Solutions (Space & Mission Systems)",
+      headcount:"~2,000+",        hiring:"🟠 ACTIVE",
+      progs:["GPS constellation ground systems","Space Force satellite operations","USAF mission computing (700K sq ft facility)"],
+      cyient:"Space systems engineering, ground station SW development, GPS signal processing, satellite systems documentation" },
+    { site:"Salt Lake City, UT",  div:"Cyber & Intelligence",    subdiv:"Air Force Solutions ⭐ NEW Jan 2026",
+      headcount:"Ramping (new)",  hiring:"🔴 HOT — active buildout",
+      progs:["ICBM sustainment (Minuteman III modernisation / Sentinel GBSD support)"],
+      cyient:"ICBM systems tech pubs, safety case documentation, requirements management, configuration management" },
+  ],
   outreachPlaybook: {
     badge: "Cold→Warm",
     headline: "Horizon Solutions launch + HAL/India expansion = two live entry points",
@@ -297,6 +422,7 @@ Object.values(BAE_DATA.divisions).forEach(d => {
     <div class="sidebar-label">Intelligence</div>
     <div class="sidebar-item" onclick="switchSection(event,'signals')">📡 Signal Chains</div>
     <div class="sidebar-item" onclick="switchSection(event,'hiring')">💼 Hiring Intelligence</div>
+    <div class="sidebar-item" onclick="switchSection(event,'usstrategy')">🇺🇸 US Strategy — Site Map</div>
     
     <div class="sidebar-item" onclick="switchSection(event,'competitive')">⚔️ Competitive Intel</div>
   <div class="sidebar-section">
@@ -384,7 +510,7 @@ Object.values(BAE_DATA.divisions).forEach(d => {
   </div>
 
   <!-- Strategic context -->
-  <div style="background:linear-gradient(135deg,#4a148c,#6b21a8);border-radius:12px;padding:16px 20px;color:#fff;">
+  <div style="background:linear-gradient(135deg,#003566,#005a9e);border-radius:12px;padding:16px 20px;color:#fff;">
     <div style="font-size:13px;font-weight:700;margin-bottom:6px;">⚡ Why BAE Systems Now — Three Simultaneous Growth Levers</div>
     <div style="font-size:12px;line-height:1.7;opacity:.93;">
       <strong>1. GCAP / Tempest</strong> — Edgewing JV (BAE 33.3%, Leonardo 33.3%, JAIEC 33.3%) awarded £686M first development contract Apr 2026. 6th-gen fighter for UK/Italy/Japan by 2035 — decade-long engineering ramp starting now.<br/>
@@ -408,7 +534,7 @@ Object.values(BAE_DATA.divisions).forEach(d => {
     <div style="font-size:12px;color:#555;margin-bottom:8px;">📍 <span class="loc-uk">Warton, Lancashire UK</span> · Edgewing JV (BAE 33.3% + Leonardo + JAIEC) · Combat Air Flying Demonstrator unveiled Jul 2025</div>
     <div style="font-size:12px;line-height:1.7;color:#444;margin-bottom:8px;">The Global Combat Air Programme (GCAP) is the UK-Italy-Japan 6th-generation fighter. Edgewing JV was formed June 2025 and immediately awarded a £686M joint international development contract in April 2026. The flying demonstrator design was unveiled at RIAT July 2025. BAE leads design and systems integration from Warton. This program will ramp engineering teams significantly through the 2020s toward a 2035 in-service target — with initial NPI engineering headcount builds happening now.</div>
     <div style="font-size:11px;color:#555;"><strong>Cyient angle:</strong> MBSE/SysML for systems architecture, CAD/CAM (CATIA) structural design, avionics integration support, digital engineering (PLM/Teamcenter), simulation & modelling</div>
-    <div style="margin-top:8px;font-size:11px;color:#6b21a8;">📌 Target: BAE Air Division TA at Warton · Search "BAE Systems GCAP engineer Warton"</div>
+    <div style="margin-top:8px;font-size:11px;color:#005a9e;">📌 Target: BAE Air Division TA at Warton · Search "BAE Systems GCAP engineer Warton"</div>
   </div>
 
   <!-- Chain 2 -->
@@ -420,7 +546,7 @@ Object.values(BAE_DATA.divisions).forEach(d => {
     <div style="font-size:12px;color:#555;margin-bottom:8px;">📍 <span class="loc-us">Nashua NH</span> · Electronic Systems HQ · CHIPS Act $35.5M funding · F-35 EW + MMIC production</div>
     <div style="font-size:12px;line-height:1.7;color:#444;margin-bottom:8px;">BAE Nashua is the Electronic Systems HQ — producing F-35 electronic warfare suites, vehicle management computers, and MMIC chips (Microelectronics Center). The $35.5M CHIPS Act funding targets quadrupling MMIC chip production for F-35 and critical defense satellites. Nashua is the most aggressively hiring BAE US site, with engineering, manufacturing, and embedded SW roles consistently open.</div>
     <div style="font-size:11px;color:#555;"><strong>Cyient angle:</strong> Embedded SW (C/C++, VHDL), DO-178C certification, EW systems integration, FPGA design (DO-254), RF/microwave engineering, electronics manufacturing</div>
-    <div style="margin-top:8px;font-size:11px;color:#6b21a8;">📌 Target: BAE Electronic Systems TA — Nashua NH · Search "BAE Systems Nashua engineer"</div>
+    <div style="margin-top:8px;font-size:11px;color:#005a9e;">📌 Target: BAE Electronic Systems TA — Nashua NH · Search "BAE Systems Nashua engineer"</div>
   </div>
 
   <!-- Chain 3 -->
@@ -432,19 +558,19 @@ Object.values(BAE_DATA.divisions).forEach(d => {
     <div style="font-size:12px;color:#555;margin-bottom:8px;">📍 <span class="loc-uk">Govan, Glasgow UK</span> · Janet Harvey Hall · 5 ships under construction · Norway £10B deal Aug 2025</div>
     <div style="font-size:12px;line-height:1.7;color:#444;margin-bottom:8px;">BAE Govan is constructing 5 Type 26 Anti-Submarine Warfare frigates simultaneously. HMS Glasgow (first ship) begins sea trials in 2026 after commissioning. Production timeline accelerated from 96 to 60 months. Norway confirmed August 2025 — at least 5 additional Type 26 frigates in a £10B deal. The Janet Harvey Hall facility enables simultaneous assembly of two 150m frigates. This is a multi-decade production program with sustained engineering demand through the 2030s.</div>
     <div style="font-size:11px;color:#555;"><strong>Cyient angle:</strong> Ship structural design, outfitting engineering, systems integration, technical publications (S1000D naval), QA/classification society support</div>
-    <div style="margin-top:8px;font-size:11px;color:#6b21a8;">📌 Target: BAE Maritime Engineering TA — Govan · Search "BAE Systems Type 26 engineer Glasgow"</div>
+    <div style="margin-top:8px;font-size:11px;color:#005a9e;">📌 Target: BAE Maritime Engineering TA — Govan · Search "BAE Systems Type 26 engineer Glasgow"</div>
   </div>
 
   <!-- Chain 4 -->
-  <div style="background:white;border-radius:12px;padding:18px;margin-bottom:16px;border-left:5px solid #6b21a8;box-shadow:0 1px 4px rgba(0,0,0,0.08);">
+  <div style="background:white;border-radius:12px;padding:18px;margin-bottom:16px;border-left:5px solid #005a9e;box-shadow:0 1px 4px rgba(0,0,0,0.08);">
     <div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:10px;">
-      <div style="font-size:14px;font-weight:700;color:#6b21a8;">🏭 York PA — Land Systems Production Ramp (M777 · Bradley · CV90)</div>
+      <div style="font-size:14px;font-weight:700;color:#005a9e;">🏭 York PA — Land Systems Production Ramp (M777 · Bradley · CV90)</div>
       <span style="background:#fdecea;color:#c62828;font-size:10px;font-weight:700;padding:3px 9px;border-radius:10px;">🔥 MULTI-PROGRAM RAMP</span>
     </div>
     <div style="font-size:12px;color:#555;margin-bottom:8px;">📍 <span class="loc-us">York PA</span> · $162M M777 (Apr 2025) · $146M M776 (Apr 2026) · CV90 Denmark $450M · Bradley A4 $390M+</div>
     <div style="font-size:12px;line-height:1.7;color:#444;margin-bottom:8px;">York PA is BAE's US land systems hub, running multiple simultaneous production ramps: M777 howitzer structures ($162M, Apr 2025), M776 cannon tubes ($146M, Apr 2026, cumulative $463M), CV90 IFV for Denmark ($450M, 44 vehicles), and Bradley A4 IFV. Combined these represent over $1.1B in active contracts at a single site. Manufacturing engineering, quality, and production planning roles are consistently open.</div>
     <div style="font-size:11px;color:#555;"><strong>Non-clearance pocket:</strong> Manufacturing engineering, supply chain, quality (AS9100), DFM/DFA, tech pubs (ASD-STE100). Most York roles do not require clearance.</div>
-    <div style="margin-top:8px;font-size:11px;color:#6b21a8;">📌 Target: BAE Platforms & Services TA — York PA · Search "BAE Systems York Pennsylvania engineer"</div>
+    <div style="margin-top:8px;font-size:11px;color:#005a9e;">📌 Target: BAE Platforms & Services TA — York PA · Search "BAE Systems York Pennsylvania engineer"</div>
   </div>
 
   <!-- Chain 5 -->
@@ -456,7 +582,7 @@ Object.values(BAE_DATA.divisions).forEach(d => {
     <div style="font-size:12px;color:#555;margin-bottom:8px;">📍 <span class="loc-uk">Warton + Samlesbury, UK</span> · ECRS Mk2 £454M (2026) · Turkey €4B · Production target 30/year</div>
     <div style="font-size:12px;line-height:1.7;color:#444;margin-bottom:8px;">BAE's Eurofighter pipeline is "filled until the first GCAP assembly." The ECRS Mk2 radar contract (£454M, 38 electronically scanning radars for UK Tranche 3 Typhoons) was awarded 2026. Aerodynamic Mod Kit (AMK) upgrades cover leading edge extensions, enlarged flaperons, and FCS/avionics modernization. Turkey's €4B order (20 aircraft, deliveries from 2030) adds to a Spain/Italy/Germany/Saudi pipeline. Production ramp from 14 to 20/year by mid-2028, then 30/year.</div>
     <div style="font-size:11px;color:#555;"><strong>Cyient angle:</strong> Avionics integration (DO-178C), ECRS Mk2 SW V&V, FCS software, technical publications upgrades (ATA/S1000D), AMK design analysis</div>
-    <div style="margin-top:8px;font-size:11px;color:#6b21a8;">📌 Target: BAE Air Division Engineering TA — Warton/Samlesbury · Search "BAE Systems Typhoon engineer"</div>
+    <div style="margin-top:8px;font-size:11px;color:#005a9e;">📌 Target: BAE Air Division Engineering TA — Warton/Samlesbury · Search "BAE Systems Typhoon engineer"</div>
   </div>
 
   <!-- Chain 6 -->
@@ -468,7 +594,7 @@ Object.values(BAE_DATA.divisions).forEach(d => {
     <div style="font-size:12px;color:#555;margin-bottom:8px;">📍 Guildford + Gloucester UK · McLean VA · Burlington MA · 94% defence revenue</div>
     <div style="font-size:12px;line-height:1.7;color:#444;margin-bottom:8px;">BAE Cyber & Intelligence (£2.76B, 94% defence) operates across Digital Intelligence (33%), Intelligence Solutions (30%), Integrated Defense Solutions (21%), and Air Force Solutions (16%). The division supports NATO intelligence systems, GEOINT, autonomous tracking (DARPA $16M Phase 2), and Space Force missile warning ($1.2B contract). Software engineering, data science, and cyber roles are consistently among BAE's fastest-filling positions globally.</div>
     <div style="font-size:11px;color:#555;"><strong>Non-clearance pocket:</strong> Data engineering, cloud architecture, software testing, DevSecOps tooling, digital transformation — focus on Digital Intelligence sub-business which has the broadest non-cleared hiring.</div>
-    <div style="margin-top:8px;font-size:11px;color:#6b21a8;">📌 Target: BAE Cyber I&S TA — US (McLean VA / Burlington MA) · Search "BAE Systems cyber intelligence engineer"</div>
+    <div style="margin-top:8px;font-size:11px;color:#005a9e;">📌 Target: BAE Cyber I&S TA — US (McLean VA / Burlington MA) · Search "BAE Systems cyber intelligence engineer"</div>
   </div>
 
   <!-- Chain 7 -->
@@ -480,7 +606,7 @@ Object.values(BAE_DATA.divisions).forEach(d => {
     <div style="font-size:12px;color:#555;margin-bottom:8px;">📍 <span class="loc-india">Bangalore, India</span> · BAE Systems India (Services) Pvt Ltd · New Delhi HQ · Est. 2009</div>
     <div style="font-size:12px;line-height:1.7;color:#444;margin-bottom:8px;">BAE's India footprint: government relations &amp; defense sales (New Delhi), offset program management, and the BAeHAL Bangalore JV with HAL (embedded systems, simulation, IT services, tech pubs for BAE platforms). BAE's "Make in India" offset obligations require deepening India supply chain and engineering capacity.</div>
     <div style="font-size:11px;color:#555;"><strong>Cyient angle:</strong> Cyient's India A&amp;D delivery model — DO-178C, CATIA V5/V6, S1000D, MBSE — aligns with BAE's India engineering requirements. ITAR-registered for US program work. 30+ year A&amp;D pedigree across avionics, structural, and tech pubs.</div>
-    <div style="margin-top:8px;font-size:11px;color:#6b21a8;">📌 Entry: VP Engineering BAE Systems Inc. (Falls Church VA) for US programs · BAE Systems India MD for India-side offset and supply chain work</div>
+    <div style="margin-top:8px;font-size:11px;color:#005a9e;">📌 Entry: VP Engineering BAE Systems Inc. (Falls Church VA) for US programs · BAE Systems India MD for India-side offset and supply chain work</div>
   </div>
 </div>
 
@@ -488,7 +614,7 @@ Object.values(BAE_DATA.divisions).forEach(d => {
 <div id="actions" class="section">
   <div class="section-title">🎯 Targeted Sales Actions — BAE Systems</div>
 
-  <div style="background:linear-gradient(135deg,#4a148c,#6b21a8);border-radius:12px;padding:16px 20px;margin-bottom:22px;color:#fff;">
+  <div style="background:linear-gradient(135deg,#003566,#005a9e);border-radius:12px;padding:16px 20px;margin-bottom:22px;color:#fff;">
     <div style="font-size:13px;font-weight:700;margin-bottom:6px;">⚡ Account Context — £83.6B Backlog, 5 Active Ramps</div>
     <div style="font-size:12px;line-height:1.7;opacity:.93;">BAE's record £83.6B backlog across 5 divisions means every engineering site is simultaneously ramping. GCAP (Air), Type 26 Norway deal (Maritime), CHIPS-funded MMIC expansion (Electronic Systems), land systems multi-program (Platforms & Services), and DARPA/Space Force (Cyber) all create distinct entry points. DO-178C / S1000D depth and ITAR-registered India delivery are the highest-leverage strategic angles.</div>
   </div>
@@ -569,6 +695,10 @@ Object.values(BAE_DATA.divisions).forEach(d => {
 <!-- ══════ HIRING ══════ -->
 <div id="hiring" class="section">
   <div class="section-title">💼 Hiring Intelligence — BAE Systems</div>
+  <div style="background:#fef9c3;border:1.5px solid #eab308;border-radius:8px;padding:10px 16px;margin-bottom:16px;font-size:12px;color:#713f12;display:flex;align-items:center;gap:10px;">
+    <span style="font-size:16px;">🔍</span>
+    <span><strong>Non-Cleared Roles Only</strong> — Cyient targets: US Citizens · Green Card holders · No citizenship restriction roles. Secret / TS / SCI / classified positions are excluded from this tracker.</span>
+  </div>
   <div class="grid-2">
     <div class="card">
       <div class="card-title">Open Roles by Division (Estimated)</div>
@@ -618,6 +748,44 @@ Object.values(BAE_DATA.divisions).forEach(d => {
   <div id="ev-cards" class="grid-2"></div>
 </div>
 
+<!-- ══════ US STRATEGY — SITE MAP ══════ -->
+<div id="usstrategy" class="section">
+  <div class="section-title">🇺🇸 US Strategy — BAE Systems Inc. Site Map</div>
+  <div style="background:#e0f2fe;border:1px solid #0e7490;border-radius:8px;padding:12px 16px;margin-bottom:22px;font-size:12.5px;color:#0c4a6e;">
+    <strong>Primary Focus: BAE Systems Inc.</strong> — the US subsidiary (Falls Church VA HQ) operates <strong>111 sites</strong> with <strong>40,000+ engineers</strong> across Electronic Systems, Platforms & Services, and Intelligence & Security. UK divisions (Air, Maritime) are secondary — US is where the engineering budget and outsource appetite is highest.
+  </div>
+  <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-bottom:24px;" id="us-site-cards"></div>
+  <div style="background:#fef3c7;border:1px solid #f59e0b;border-radius:8px;padding:14px 18px;margin-bottom:20px;">
+    <div style="font-size:13px;font-weight:700;color:#92400e;margin-bottom:10px;">🎯 US Entry Strategy — Priority Order</div>
+    <div style="display:grid;grid-template-columns:repeat(2,1fr);gap:12px;font-size:12px;color:#333;">
+      <div style="background:white;border-radius:6px;padding:12px;border-left:3px solid #dc2626;">
+        <div style="font-weight:700;color:#dc2626;margin-bottom:4px;">🔴 IMMEDIATE — Electronic Systems (Nashua NH + Maple Grove MN)</div>
+        CHIPS Act $35.5M + new 247K sq ft facility = engineering ramp in progress. Target: VP Engineering Electronic Combat and C4ISR Systems. Lead with DO-178C / DO-254 pedigree and embedded SW in C/C++/VHDL.
+      </div>
+      <div style="background:white;border-radius:6px;padding:12px;border-left:3px solid #ea580c;">
+        <div style="font-weight:700;color:#ea580c;margin-bottom:4px;">🔴 IMMEDIATE — Ship Repair (Norfolk VA, San Diego CA, Jacksonville FL)</div>
+        S1000D naval tech pubs is the clearest whitespace — no India-based competitor covers naval documentation at scale. Entry: S1000D authoring pilot for one CMM or AMM at Norfolk (largest site).
+      </div>
+      <div style="background:white;border-radius:6px;padding:12px;border-left:3px solid #0284c7;">
+        <div style="font-weight:700;color:#0284c7;margin-bottom:4px;">🟠 HIGH — Platforms & Services (York PA + Sterling Heights MI)</div>
+        AMPV $4.6B + M1A2 SEPv3 ongoing. Target VP Engineering at York PA for vehicle systems engineering, structural analysis, and tech pubs. Large headcount = large outsource potential.
+      </div>
+      <div style="background:white;border-radius:6px;padding:12px;border-left:3px solid #0078d4;">
+        <div style="font-weight:700;color:#0078d4;margin-bottom:4px;">🟠 HIGH — Intelligence & Security (Falls Church VA + Rockville MD)</div>
+        4,400+ engineers at Rockville MD alone. Digital engineering, systems integration, and MBSE are outsourceable (non-cleared). Azure cloud engineering is confirmed BAE investment — Cyient Azure partner.
+      </div>
+      <div style="background:white;border-radius:6px;padding:12px;border-left:3px solid #059669;">
+        <div style="font-weight:700;color:#059669;margin-bottom:4px;">🟡 PLAN — Space & Mission Systems (Boulder / Broomfield CO)</div>
+        700K sq ft, GPS + Space Force work. Target VP Engineering Air Force Solutions for ground station SW and satellite systems documentation. 2026 engagement to land FY2027 programme.
+      </div>
+      <div style="background:white;border-radius:6px;padding:12px;border-left:3px solid #b45309;">
+        <div style="font-weight:700;color:#b45309;margin-bottom:4px;">🟡 PLAN — Salt Lake City UT (ICBM) + Cedar Rapids IA</div>
+        New Jan 2026 (ICBM sustainment) and Cedar Rapids (Ordnance). Niche but long-duration programmes — safety case documentation and tech pubs are entry points. Plan FY2027 engagement.
+      </div>
+    </div>
+  </div>
+</div>
+
 <!-- ══════ COMPETITIVE INTEL ══════ -->
 <div id="competitive" class="section">
   <div class="section-title">⚔️ Competitive Intelligence — BAE Systems North America</div>
@@ -629,7 +797,7 @@ Object.values(BAE_DATA.divisions).forEach(d => {
   </div>
 
   <!-- Verify Global secondary watch -->
-  <div style="background:linear-gradient(135deg,#6d28d9,#7c3aed);border-radius:10px;padding:12px 16px;margin-bottom:18px;color:#fff;">
+  <div style="background:linear-gradient(135deg,#006db3,#0078d4);border-radius:10px;padding:12px 16px;margin-bottom:18px;color:#fff;">
     <div style="font-size:12px;font-weight:700;margin-bottom:4px;">👁️ SECONDARY WATCH — Verify Global</div>
     <div style="font-size:11px;line-height:1.65;opacity:.93;">Verify Global (Costa Mesa CA) — Supplier Quality Management (FAI AS9102, PPAP, AS9145). Overlap at <strong>York PA (land systems supply quality)</strong> and <strong>Nashua NH (electronic components FAI)</strong>. No India office — Cyient's India delivery is the differentiator for full-scope engineering beyond quality audits.</div>
   </div>
@@ -774,7 +942,7 @@ Object.values(BAE_DATA.divisions).forEach(d => {
     <div class="contact-card" style="border-left-color:#0e7490;">
       <div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:4px;">
         <div class="contact-name">Director, Systems Engineering — Electronic Systems</div>
-        <span class="tag" style="background:#ede9fe;color:#6d28d9;font-size:10px;">Target</span>
+        <span class="tag" style="background:#dbeafe;color:#006db3;font-size:10px;">Target</span>
       </div>
       <div class="contact-title">AESA Radar Systems · MMIC Integration · Sensor Fusion — MBSE programs</div>
       <div class="contact-location">📍 Nashua, NH · Search: "Director Systems Engineering BAE Electronic Systems"</div>
@@ -783,7 +951,7 @@ Object.values(BAE_DATA.divisions).forEach(d => {
     <div class="contact-card" style="border-left-color:#0e7490;">
       <div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:4px;">
         <div class="contact-name">VP Operations, Electronic Systems</div>
-        <span class="tag" style="background:#ede9fe;color:#6d28d9;font-size:10px;">Target</span>
+        <span class="tag" style="background:#dbeafe;color:#006db3;font-size:10px;">Target</span>
       </div>
       <div class="contact-title">Manufacturing Engineering · Supply Chain · AS9100 Quality — Nashua NH</div>
       <div class="contact-location">📍 Nashua, NH · Search: "VP Operations BAE Electronic Systems Nashua"</div>
@@ -792,9 +960,9 @@ Object.values(BAE_DATA.divisions).forEach(d => {
   </div>
 
   <!-- Platforms & Services -->
-  <div style="font-size:14px;font-weight:800;color:#7c3aed;margin-bottom:12px;padding-bottom:6px;border-bottom:2px solid #ede9fe;">🚛 Platforms &amp; Services — York PA · Sterling Heights MI</div>
+  <div style="font-size:14px;font-weight:800;color:#0078d4;margin-bottom:12px;padding-bottom:6px;border-bottom:2px solid #dbeafe;">🚛 Platforms &amp; Services — York PA · Sterling Heights MI</div>
   <div class="grid-2" style="margin-bottom:24px;">
-    <div class="contact-card" style="border-left-color:#7c3aed;">
+    <div class="contact-card" style="border-left-color:#0078d4;">
       <div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:4px;">
         <div class="contact-name">VP Engineering, Platforms &amp; Services</div>
         <span class="tag" style="background:#f0fdf4;color:#166534;font-size:10px;">Primary Target</span>
@@ -803,10 +971,10 @@ Object.values(BAE_DATA.divisions).forEach(d => {
       <div class="contact-location">📍 York, PA (primary) · Sterling Heights, MI · Search: "VP Engineering BAE Platforms Services"</div>
       <div style="margin-top:6px;font-size:11px;color:#4b5563;">🎯 OMFV program ramp: MBSE/SysML, digital twin, systems engineering documentation</div>
     </div>
-    <div class="contact-card" style="border-left-color:#7c3aed;">
+    <div class="contact-card" style="border-left-color:#0078d4;">
       <div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:4px;">
         <div class="contact-name">Director Engineering, Combat Vehicles</div>
-        <span class="tag" style="background:#ede9fe;color:#6d28d9;font-size:10px;">Target</span>
+        <span class="tag" style="background:#dbeafe;color:#006db3;font-size:10px;">Target</span>
       </div>
       <div class="contact-title">Bradley IFV / OMFV / Paladin Systems Engineering — York PA &amp; Sterling Heights MI</div>
       <div class="contact-location">📍 York, PA / Sterling Heights, MI · Search: "Director Engineering BAE Systems York PA" or "Sterling Heights"</div>
@@ -961,7 +1129,7 @@ divOrder.forEach(key => {
   grid.appendChild(card);
 });
 
-// Render legends
+// Render legends with US site chips
 divOrder.forEach(key => {
   const d = BAE_DATA.divisions[key];
   const legend = document.getElementById('legend-' + key);
@@ -969,7 +1137,14 @@ divOrder.forEach(key => {
   d.sub.forEach((s, i) => {
     const row = document.createElement('div');
     row.className = 'div-legend-row';
-    row.innerHTML = `<span class="div-legend-label"><span class="div-legend-dot" style="background:${s.color};"></span>${letters[i]}&nbsp;${s.label}</span><span class="div-legend-pct">${s.pct}%</span>`;
+    // Filter to US-only sites (exclude UK, Sweden, Turkey, Australia, Saudi, French, Japan, etc.)
+    const usSites = (s.us || []).filter(x =>
+      !x.match(/UK|Sweden|Örnsköldsvik|Karlskoga|Turkey|Ankara|Saudi|Australia|France|Italy|Japan|Warton|Samlesbury|Brough|Barrow|Govan|Bovington|Telford|Rosyth/i)
+    );
+    const siteChips = usSites.length
+      ? `<div style="margin-top:3px;font-size:10px;color:#555;line-height:1.5;">${usSites.map(u=>`<span style="background:#e0f2fe;color:#0c4a6e;padding:1px 5px;border-radius:3px;margin-right:3px;display:inline-block;margin-bottom:2px;">${u}</span>`).join('')}</div>`
+      : '';
+    row.innerHTML = `<span class="div-legend-label"><span class="div-legend-dot" style="background:${s.color};"></span>${letters[i]}&nbsp;${s.label}</span><span class="div-legend-pct">${s.pct}%</span>${siteChips}`;
     legend.appendChild(row);
   });
 });
@@ -1003,14 +1178,14 @@ requestAnimationFrame(() => {
     document.getElementById('op-headline').textContent = op.headline;
     document.getElementById('op-badge').textContent    = op.badge;
     document.getElementById('op-triggers').innerHTML   = op.triggers.map(t => `
-      <div class="card" style="border-top-color:#7c3aed;">
+      <div class="card" style="border-top-color:#0078d4;">
         <div class="card-title">${t.icon} ${t.label}</div>
         <p style="font-size:12.5px;line-height:1.7;color:#444;margin-bottom:10px;">${t.body}</p>
         <div style="background:#f0fdf4;border-left:3px solid #22c55e;padding:8px 12px;border-radius:0 6px 6px 0;font-size:11.5px;color:#166534;font-weight:600;">⚡ Action: ${t.action}</div>
       </div>`).join('');
     document.getElementById('op-steps').innerHTML = op.coldToWarm.map(s => `
       <div style="display:flex;gap:14px;align-items:flex-start;padding:12px 0;border-bottom:1px solid #f0f0f0;">
-        <div style="min-width:28px;height:28px;background:#7c3aed;color:#fff;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:700;">${s.step}</div>
+        <div style="min-width:28px;height:28px;background:#0078d4;color:#fff;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:700;">${s.step}</div>
         <div><div style="font-size:13px;font-weight:700;color:#1a1a2e;margin-bottom:4px;">${s.label}</div>
         <div style="font-size:12px;color:#555;line-height:1.6;">${s.body}</div></div>
       </div>`).join('');
@@ -1029,6 +1204,26 @@ requestAnimationFrame(() => {
         <div style="font-size:12px;color:#666;margin-bottom:6px;">📍 ${e.location} &nbsp;·&nbsp; 📅 ${e.date} &nbsp;·&nbsp; <span class="tag">${e.type}</span></div>
         <p style="font-size:12.5px;line-height:1.7;color:#444;">${e.why}</p>
       </div>`).join('');
+
+    // ── US Strategy — Site Cards ────────────────────────────────────────
+    const hiringColor = { '🔴': '#dc2626', '🟠': '#ea580c', '🟡': '#ca8a04' };
+    const usc = document.getElementById('us-site-cards');
+    if (usc) {
+      usc.innerHTML = BAE_DATA.usSites.map(s => {
+        const hc = hiringColor[s.hiring.charAt(0)] || '#666';
+        return `<div style="background:white;border-radius:8px;padding:16px;box-shadow:0 1px 3px rgba(0,0,0,.1);border-top:3px solid ${hc};">
+          <div style="font-size:14px;font-weight:700;color:#002b5c;margin-bottom:2px;">📍 ${s.site}</div>
+          <div style="font-size:11px;color:#005a9e;font-weight:600;margin-bottom:4px;">${s.div}</div>
+          <div style="font-size:10.5px;color:#555;margin-bottom:6px;">${s.subdiv}</div>
+          <div style="display:flex;gap:8px;margin-bottom:8px;flex-wrap:wrap;">
+            <span style="font-size:10.5px;background:#f0f0f0;padding:2px 7px;border-radius:10px;font-weight:600;">👥 ${s.headcount}</span>
+            <span style="font-size:10.5px;padding:2px 7px;border-radius:10px;font-weight:700;background:${hc}15;color:${hc};">${s.hiring}</span>
+          </div>
+          <div style="font-size:10.5px;color:#444;margin-bottom:6px;"><strong>Programs:</strong> ${s.progs.join(' · ')}</div>
+          <div style="background:#eff6ff;border-left:3px solid #0284c7;padding:6px 10px;border-radius:0 4px 4px 0;font-size:10.5px;color:#1e40af;line-height:1.5;">🎯 ${s.cyient}</div>
+        </div>`;
+      }).join('');
+    }
   }
 
   });
