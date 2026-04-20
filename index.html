@@ -1637,7 +1637,117 @@ function showPriTab(btn, panelId) {
 
   })();
   </script>
-  <!-- END CHARTS: BAE Systems -->
+  
+  <!-- FY ANNUAL + SEGMENT CHARTS: BAE Systems -->
+  <div style="background:white;border-radius:10px;padding:20px;box-shadow:0 2px 8px rgba(0,0,0,0.08);margin-bottom:16px;">
+    <div style="font-size:13px;font-weight:700;color:#1a237e;margin-bottom:4px;">📅 Full-Year Revenue Summary (£B)</div>
+    <div style="font-size:11px;color:#666;margin-bottom:14px;">Annual totals: FY2023 → FY2024 → FY2025 &nbsp;|&nbsp; Compare growth trajectory year-over-year</div>
+    <div style="max-width:480px;">
+      <canvas id="fy_bae" style="max-height:200px;"></canvas>
+    </div>
+    <div style="margin-top:10px;font-size:11px;color:#555;line-height:1.7;">
+      <strong>FY2023 → FY2024:</strong> +15.2% &nbsp;|&nbsp; <strong>FY2024 → FY2025:</strong> +7.5% &nbsp;|&nbsp; <strong>3-year CAGR:</strong> 11.3%
+    </div>
+  </div>
+
+  <div style="background:white;border-radius:10px;padding:20px;box-shadow:0 2px 8px rgba(0,0,0,0.08);margin-bottom:16px;">
+    <div style="font-size:13px;font-weight:700;color:#1a237e;margin-bottom:4px;">🏢 Segment Revenue Breakdown (£B)</div>
+    <div style="font-size:11px;color:#666;margin-bottom:14px;">8-quarter stacked view — hover for segment detail</div>
+    <canvas id="seg_bae" style="max-height:280px;"></canvas>
+    <div style="margin-top:10px;font-size:10.5px;color:#777;font-style:italic;">Source: BAE Systems H1/H2 results. BAE reports semi-annually — quarterly figures are estimates based on H1/H2 split.</div>
+  </div>
+
+  <script>
+  (function(){
+    // FY Annual chart
+    new Chart(document.getElementById('fy_bae'), {
+      type: 'bar',
+      data: {
+        labels: ["FY2023","FY2024","FY2025"],
+        datasets: [{
+          label: 'Annual Revenue (£B)',
+          data: [23.0, 26.5, 28.5],
+          backgroundColor: ['#1a237ecc','#1a237edd','#1a237e'],
+          borderColor: '#1a237e',
+          borderWidth: 2,
+          borderRadius: 6
+        }]
+      },
+      options: {
+        responsive: true, maintainAspectRatio: true,
+        plugins: {
+          legend: { display: false },
+          tooltip: { callbacks: { label: function(c){ return ' '+c.raw+' £B'; } } }
+        },
+        scales: {
+          y: { beginAtZero: false, grid: { color: 'rgba(0,0,0,0.04)' }, ticks: { font: {size:11} } },
+          x: { grid: { display: false }, ticks: { font: {size:12}, color:'#333' } }
+        }
+      }
+    });
+
+    // Segment stacked bar
+    new Chart(document.getElementById('seg_bae'), {
+      type: 'bar',
+      data: {
+        labels: ["Q1'24","Q2'24","Q3'24","Q4'24","Q1'25","Q2'25","Q3'25","Q4'25"],
+        datasets: [
+              {
+              label: "Electronic Systems (US)",
+              data: [2.2, 2.3, 2.4, 2.5, 2.3, 2.5, 2.6, 2.8],
+              backgroundColor: "rgba(26,35,126,0.82)",
+              borderColor: "rgba(26,35,126,1.0)",
+              borderWidth: 1, borderRadius: 3
+            },
+              {
+              label: "Platforms & Services (US)",
+              data: [0.9, 0.9, 1.0, 1.0, 0.9, 1.0, 1.0, 1.1],
+              backgroundColor: "rgba(183,28,28,0.82)",
+              borderColor: "rgba(183,28,28,1.0)",
+              borderWidth: 1, borderRadius: 3
+            },
+              {
+              label: "Air",
+              data: [1.9, 2.0, 2.1, 2.2, 2.0, 2.1, 2.2, 2.4],
+              backgroundColor: "rgba(1,87,155,0.82)",
+              borderColor: "rgba(1,87,155,1.0)",
+              borderWidth: 1, borderRadius: 3
+            },
+              {
+              label: "Maritime",
+              data: [1.2, 1.3, 1.4, 1.6, 1.4, 1.5, 1.6, 1.7],
+              backgroundColor: "rgba(27,94,32,0.82)",
+              borderColor: "rgba(27,94,32,1.0)",
+              borderWidth: 1, borderRadius: 3
+            }
+            ]
+      },
+      options: {
+        responsive: true, maintainAspectRatio: true,
+        plugins: {
+          legend: {
+            display: true,
+            position: 'bottom',
+            labels: { font: {size:10}, padding: 12, boxWidth: 12 }
+          },
+          tooltip: { mode: 'index', callbacks: {
+            footer: function(items){
+              var total = items.reduce(function(a,b){ return a+(b.raw||0); },0);
+              return 'Total: '+total.toFixed(2)+' £B';
+            }
+          } }
+        },
+        scales: {
+          x: { stacked: true, grid: { display: false }, ticks: { font: {size:9}, maxRotation: 45 } },
+          y: { stacked: true, grid: { color: 'rgba(0,0,0,0.04)' }, ticks: { font: {size:10} } }
+        }
+      }
+    });
+
+  })();
+  </script>
+  <!-- END SEGMENT/FY CHARTS -->
+<!-- END CHARTS: BAE Systems -->
 
   <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:16px;">
     <div style="background:white;border-radius:10px;padding:18px;box-shadow:0 2px 8px rgba(0,0,0,0.08);">
